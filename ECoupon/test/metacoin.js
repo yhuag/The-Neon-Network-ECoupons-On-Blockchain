@@ -1,7 +1,7 @@
 var Coupon = artifacts.require("Coupon");
 var Web3 = require('web3');
 var web3 = new Web3(
-  new Web3.providers.HttpProvider('http//localhost:8545')
+  new Web3.providers.HttpProvider('http://localhost:8545')
 );
 
 contract('Coupon', function (accounts) {
@@ -9,11 +9,9 @@ contract('Coupon', function (accounts) {
   let coupon;
 
   beforeEach(async function () {
-    var startTime = 0;
-    var endTime = startTime + 60 * 60 * 60 * 1000;
-    console.log(startTime, endTime);
-    coupon = await Coupon.new(startTime, endTime); // endTime is 1 hour after startTime
-
+    var startTime = web3.eth.getBlock("latest").timestamp;
+    var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
+    coupon = await Coupon.new(startTime, endTime);
   });
 
 

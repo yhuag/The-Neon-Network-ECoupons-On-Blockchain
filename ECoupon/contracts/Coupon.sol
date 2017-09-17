@@ -33,14 +33,14 @@ contract Coupon is StandardToken {
   }
 
   modifier isValidTime(){
-    // require(startTime <= now);
-    // require(endTime >= now);
+    require(startTime <= now);
+    require(endTime >= now);
     _;
   } 
 
   // Constructor
   function Coupon(uint256 _startTime, uint256 _endTime) {
-    //require(_startTime >= now);
+    require(_startTime >= now);
     require(_endTime >= _startTime);
 
     owner = msg.sender;
