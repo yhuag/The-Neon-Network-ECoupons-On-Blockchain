@@ -6,8 +6,8 @@ contract Coupon is StandardToken {
   // Configuration
   string public constant name = "E-Coupon General Grant";
   string public constant symbol = "EGG";
-  string public startTime;
-  string public endTime;
+  uint256 public startTime;
+  uint256 public endTime;
 
   uint8 public constant decimals = 18;
   uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(decimals));
@@ -33,14 +33,14 @@ contract Coupon is StandardToken {
   }
 
   modifier isValidTime(){
-    require(startTime <= now);
-    require(endTime >= now);
+    // require(startTime <= now);
+    // require(endTime >= now);
     _;
   } 
 
   // Constructor
-  function Coupon(_startTime, _endTime) {
-    require(_startTime >= now);
+  function Coupon(uint256 _startTime, uint256 _endTime) {
+    //require(_startTime >= now);
     require(_endTime >= _startTime);
 
     owner = msg.sender;
@@ -48,10 +48,6 @@ contract Coupon is StandardToken {
     totalSupply = INITIAL_SUPPLY;
     startTime = _startTime;
     endTime = _endTime;
-  }
-
-  function totalSupply() public constant returns (uint256 totalSupply) {
-    totalSupply = _totalSupply;
   }
 
   function useCoupon(uint256 amount) public isValidTime returns (bool success) {

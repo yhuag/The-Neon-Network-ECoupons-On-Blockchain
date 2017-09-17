@@ -1,18 +1,30 @@
-var Coupon = artifacts.require("./Coupon.sol");
+var Coupon = artifacts.require("Coupon");
+var Web3 = require('web3');
+var web3 = new Web3(
+  new Web3.providers.HttpProvider('http//localhost:8545')
+);
 
 contract('Coupon', function (accounts) {
 
-  // let coupon; 
+  let coupon;
 
-  // beforeEach(async function () {
-  //   var startTime = new Date().getDate();
-  //   var endTime = startTime + 60 * 60 * 60 * 1000
-  //   coupon = await Coupon.new(startTime, endTime); // endTime is 1 hour after startTime
-  // });
+  beforeEach(async function () {
+    var startTime = 0;
+    var endTime = startTime + 60 * 60 * 60 * 1000;
+    console.log(startTime, endTime);
+    coupon = await Coupon.new(startTime, endTime); // endTime is 1 hour after startTime
 
-  // it('spend coupon and check balances', async function(){
-  //   var amountToBeUsed = 100;
-  //   coupon.useCoupon(accounts[0], amountToBeUsed);
+  });
 
-  // });
-});
+
+  it('spend coupon and check balances', async function () {
+    var amountToBeUsed = 100;
+    var initialBalance = await coupon.checkBalances(accounts[0]);
+
+    if (await coupon.useCoupon(amountToBeUsed, { from: accounts[0] }) == true) {
+      var balancesUsed = await coupon.checkBalancesUsed(accounts[0]);
+      var balancesLeft = await coupon.checkBalances(accounts[0]);
+      assert.equal(initialBalance - balancesUsed, balancesLeft, 'balance not match');
+    }
+  });
+})
