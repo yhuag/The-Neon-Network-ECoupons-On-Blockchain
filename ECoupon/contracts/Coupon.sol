@@ -58,11 +58,19 @@ contract Coupon is StandardToken {
     success = true; 
   }
 
+  function checkBalances(address user) onlyOwner constant returns (uint256 _balances) {
+    _balances = balances[user];
+  }
+
   function checkBalancesUsed(address user) onlyOwner constant returns (uint256 _balancesUsed) {
     _balancesUsed = balancesUsed[user];
   }
 
-  function checkBalances(address user) onlyOwner constant returns (uint256 _balances) {
-    _balances = balances[user];
+  function getAccountBalances() public constant returns (uint256 _balances) {
+    _balances = balances[msg.sender];
+  }
+
+  function getAccountBalancesUsed() public constant returns (uint256 _balances) {
+    _balances = balancesUsed[msg.sender];
   }
 }
