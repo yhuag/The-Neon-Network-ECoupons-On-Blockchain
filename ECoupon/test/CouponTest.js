@@ -9,7 +9,7 @@ contract('Coupon', function (accounts) {
   let coupon;
 
   beforeEach(async function () {
-    var startTime = web3.eth.getBlock("latest").timestamp;
+    var startTime = web3.eth.getBlock("latest").timestamp + 10;
     var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
     coupon = await Coupon.new(startTime, endTime);
   });
