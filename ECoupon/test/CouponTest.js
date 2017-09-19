@@ -9,7 +9,7 @@ contract('Coupon', function (accounts) {
   let coupon;
 
   beforeEach(async function () {
-    var startTime = web3.eth.getBlock("latest").timestamp + 10;
+    var startTime = web3.eth.getBlock("latest").timestamp;
     var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
     coupon = await Coupon.new(startTime, endTime);
   });
@@ -19,7 +19,7 @@ contract('Coupon', function (accounts) {
     var amountToBeUsed = 100;
     var initialBalance = await coupon.checkBalances(accounts[0]);
 
-    if (await coupon.useCoupon(amountToBeUsed, { from: accounts[0] }) == true) {
+    if (await coupon.redeem(amountToBeUsed, { from: accounts[0] }) == true) {
       var balancesUsed = await coupon.checkBalancesUsed(accounts[0]);
       var balancesLeft = await coupon.checkBalances(accounts[0]);
       assert.equal(initialBalance - balancesUsed, balancesLeft, 'balance not match');

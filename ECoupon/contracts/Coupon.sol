@@ -32,7 +32,7 @@ contract Coupon is StandardToken {
     _;
   }
 
-  modifier isValidTime(){
+  modifier isValidRedeemTime(){
     require(startTime <= now);
     require(endTime >= now);
     _;
@@ -40,7 +40,6 @@ contract Coupon is StandardToken {
 
   // Constructor
   function Coupon(uint256 _startTime, uint256 _endTime) {
-    require(_startTime >= now);
     require(_endTime >= _startTime);
 
     owner = msg.sender;
@@ -50,7 +49,7 @@ contract Coupon is StandardToken {
     endTime = _endTime;
   }
 
-  function useCoupon(uint256 amount) public isValidTime returns (bool success) {
+  function redeem(uint256 amount) public isValidRedeemTime returns (bool success) {
     require(balances[msg.sender] >= amount);
 
     balancesUsed[msg.sender].add(amount);
