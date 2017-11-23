@@ -11,9 +11,8 @@ contract Coupon is StandardToken {
 
   uint8 public constant DECIMALS = 18;
   uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
+  address public constant ISSUER_ADDRESS = "0x4f57142ec0587cc0a670374d15a8d0d6cec0704e";  // TODO: To be changed
 
-  // Owner of the contract
-  address public owner;
 
   // Balance for each account
   mapping(address => uint256) balances;
@@ -24,9 +23,9 @@ contract Coupon is StandardToken {
   // Approval of transfer
   mapping(address => mapping(address => uint256)) allowed;
 
-  // Functions with this modifier can only be executed by the owner
-  modifier onlyOwner() {
-    assert(msg.sender == owner);
+  // Functions with this modifier can only be executed by the issuer
+  modifier onlyIssuer() {
+    assert(msg.sender == ISSUER_ADDRESS);
     _;
   }
 
@@ -37,13 +36,12 @@ contract Coupon is StandardToken {
     _;
   } 
 
-  // Constructor
-  function Coupon(uint256 _startTime, uint256 _endTime) {
+  // Constructor: called by the coupon issuer
+  function Coupon(uint256 _startTime, uint256 _endTime, address user) onlyIssuer {
     require(_endTime >= _startTime);
 
-    owner = msg.sender;
-    balances[owner] = INITIAL_SUPPLY;
-    totalSupply = INITIAL_SUPPLY;
+    balances[user] = INITIAL_SUPPLY; 
+    totalSupply.add(INITIAL_SUPPLY);  // The supply of a newly created coupon adds to totalSupply of the coupon system
     startTime = _startTime;
     endTime = _endTime;
   }
@@ -58,13 +56,13 @@ contract Coupon is StandardToken {
     success = true; 
   }
 
-  // Only the owner can check the balance of a specific user
-  function checkBalances(address user) onlyOwner constant returns (uint256 _balances) {
+  // Only the issuer can check the balance of a specific user
+  function checkBalances(address user) onlyIssuer constant returns (uint256 _balances) {
     _balances = balances[user];
   }
 
-  // Only the owner can check the balanceUsed of a specific user
-  function checkBalancesUsed(address user) onlyOwner constant returns (uint256 _balancesUsed) {
+  // Only the issuer can check the balanceUsed of a specific user
+  function checkBalancesUsed(address user) onlyIssuer constant returns (uint256 _balancesUsed) {
     _balancesUsed = balancesUsed[user];
   }
 
