@@ -19,7 +19,7 @@ contract('Coupon', function (accounts) {
     var amountToBeUsed = 100;
     var initialBalance = await coupon.checkBalances(accounts[0]);
 
-    if (await coupon.useCoupon(amountToBeUsed, { from: accounts[0] }) == true) {
+    if (await coupon.redeem(amountToBeUsed, { from: accounts[0] }) == true) {
       var balancesUsed = await coupon.checkBalancesUsed(accounts[0]);
       var balancesLeft = await coupon.checkBalances(accounts[0]);
       assert.equal(initialBalance - balancesUsed, balancesLeft, 'balance not match');

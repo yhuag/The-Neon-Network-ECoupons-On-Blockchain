@@ -9,8 +9,8 @@ contract Coupon is StandardToken {
   uint256 public startTime;
   uint256 public endTime;
 
-  uint8 public constant decimals = 18;
-  uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(decimals));
+  uint8 public constant DECIMALS = 18;
+  uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
 
   // Owner of the contract
   address public owner;
@@ -30,7 +30,8 @@ contract Coupon is StandardToken {
     _;
   }
 
-  modifier isValidTime(){
+  // Check whether the redeem time is between the span of startTime and endTime.
+  modifier isValidRedeemTime(){
     require(startTime <= now);
     require(endTime >= now);
     _;
@@ -38,7 +39,6 @@ contract Coupon is StandardToken {
 
   // Constructor
   function Coupon(uint256 _startTime, uint256 _endTime) {
-    require(_startTime >= now);
     require(_endTime >= _startTime);
 
     owner = msg.sender;
@@ -48,7 +48,8 @@ contract Coupon is StandardToken {
     endTime = _endTime;
   }
 
-  function useCoupon(uint256 amount) public isValidTime returns (bool success) {
+  // Update the balances/balancesUsed of the user when coupon redeemed
+  function redeem(uint256 amount) public isValidRedeemTime returns (bool success) {
     require(balances[msg.sender] >= amount);
 
     balancesUsed[msg.sender].add(amount);
@@ -57,11 +58,23 @@ contract Coupon is StandardToken {
     success = true; 
   }
 
+  // Only the owner can check the balance of a specific user
+  function checkBalances(address user) onlyOwner constant returns (uint256 _balances) {
+    _balances = balances[user];
+  }
+
+  // Only the owner can check the balanceUsed of a specific user
   function checkBalancesUsed(address user) onlyOwner constant returns (uint256 _balancesUsed) {
     _balancesUsed = balancesUsed[user];
   }
 
-  function checkBalances(address user) onlyOwner constant returns (uint256 _balances) {
-    _balances = balances[user];
+  // Anyone can check their personal balances
+  function getAccountBalances() public constant returns (uint256 _balances) {
+    _balances = balances[msg.sender];
+  }
+
+  // Anyone can check their personal balances
+  function getAccountBalancesUsed() public constant returns (uint256 _balances) {
+    _balances = balancesUsed[msg.sender];
   }
 }
