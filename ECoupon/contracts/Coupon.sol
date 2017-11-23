@@ -58,8 +58,8 @@ contract Coupon is StandardToken {
   function redeem(uint256 amount) public isValidRedeemTime isValidRedeemAmount(amount) returns (bool success) {
     require(balances[msg.sender] >= amount);
 
-    balancesUsed[msg.sender].add(amount);
-    balances[msg.sender].sub(amount);
+    balancesUsed[msg.sender] = balancesUsed[msg.sender].add(amount);
+    balances[msg.sender] = balances[msg.sender].sub(amount);
 
     success = true; 
   }
