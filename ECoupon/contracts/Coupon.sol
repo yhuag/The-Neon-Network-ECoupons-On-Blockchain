@@ -26,9 +26,7 @@ contract Coupon is StandardToken {
 
   // Functions with this modifier can only be executed by the owner
   modifier onlyOwner() {
-    if (msg.sender != owner) {
-      throw;
-    }
+    assert(msg.sender == owner);
     _;
   }
 
