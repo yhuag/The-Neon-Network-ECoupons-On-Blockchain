@@ -8,6 +8,7 @@ contract Coupon is StandardToken {
   string public constant symbol = "EGG";
   uint256 public startTime;
   uint256 public endTime;
+  uint256 public unit;
 
   uint8 public constant DECIMALS = 18;
   uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
@@ -36,18 +37,25 @@ contract Coupon is StandardToken {
     _;
   } 
 
-  // Constructor: called by the coupon issuer
-  function Coupon(uint256 _startTime, uint256 _endTime, address user) onlyIssuer {
+  // Check whether the amount is an integral number of units.
+  modifier isValidRedeemAmount(uint256 _amount){
+    require(_amount.mod(unit) == 0);
+    _;
+  }
+
+  // Constructor: called by the coupon issuer. A user can only redeem an integral number of units at a time.
+  function Coupon(uint256 _startTime, uint256 _endTime, address user, uint256 _unit) onlyIssuer {
     require(_endTime >= _startTime);
 
     balances[user] = INITIAL_SUPPLY; 
     totalSupply.add(INITIAL_SUPPLY);  // The supply of a newly created coupon adds to totalSupply of the coupon system
     startTime = _startTime;
     endTime = _endTime;
+    unit = _unit;
   }
 
   // Update the balances/balancesUsed of the user when coupon redeemed
-  function redeem(uint256 amount) public isValidRedeemTime returns (bool success) {
+  function redeem(uint256 amount) public isValidRedeemTime isValidRedeemAmount(amount) returns (bool success) {
     require(balances[msg.sender] >= amount);
 
     balancesUsed[msg.sender].add(amount);
