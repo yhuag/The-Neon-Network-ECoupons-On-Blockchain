@@ -48,7 +48,7 @@ contract Coupon is StandardToken {
     require(_endTime >= _startTime);
 
     balances[user] = INITIAL_SUPPLY; 
-    totalSupply.add(INITIAL_SUPPLY);  // The supply of a newly created coupon adds to totalSupply of the coupon system
+    totalSupply = totalSupply.add(INITIAL_SUPPLY);  // The supply of a newly created coupon adds to totalSupply of the coupon system
     startTime = _startTime;
     endTime = _endTime;
     unit = _unit;
