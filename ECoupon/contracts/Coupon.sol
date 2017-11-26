@@ -11,7 +11,8 @@ contract Coupon is StandardToken {
   uint256 public unit;
 
   uint8 public constant DECIMALS = 18;
-  uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
+  uint256 public constant INITIAL_SUPPLY_RAW = 10000;
+  uint256 public constant INITIAL_SUPPLY = INITIAL_SUPPLY_RAW * (10 ** uint256(DECIMALS));
   address public constant ISSUER_ADDRESS = 0x8484345ec508cd007470b2eab04ddb61b5198305;  // TODO: To be changed
 
 
