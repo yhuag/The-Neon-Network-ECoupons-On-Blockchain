@@ -6,28 +6,34 @@ var web3 = new Web3(
 
 contract('Coupon', function (accounts) {
 
-  let coupon;
+  // let coupon;
 
   // Initialization: get startTime & endTime and create Coupon instance
   beforeEach(async function () {
-    var startTime = web3.eth.getBlock("latest").timestamp;
-    var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
-    coupon = await Coupon.new(startTime, endTime);
+    // var startTime = web3.eth.getBlock("latest").timestamp;
+    // var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
+    // coupon = await Coupon.new(startTime, endTime);
   });
 
-  // Redeem coupon and check whether balancesUsed + balances = initial balance
-  it('redeem coupon and check balances equality', async function () {
-    var amountToBeUsed = 100;
-    var initialBalance = await coupon.checkBalances(accounts[0]);
+  // Test Complete Redeem (should success)
+  it('redeem coupon completely', async function () {
+    // Create coupon
+    var startTime = web3.eth.getBlock("latest").timestamp;
+    var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
+    let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000);
 
-    if (await coupon.redeem(amountToBeUsed, { from: accounts[0] }) == true) {
-      var balancesUsed = await coupon.checkBalancesUsed(accounts[0]);
-      var balancesLeft = await coupon.checkBalances(accounts[0]);
+    // Redeem completely
+    if (await coupon.redeemComplete({ from: accounts[1] }) == true) {
+      // Inits
+      var balancesUsed = await coupon.checkBalancesUsed(accounts[1]);
+      var balances = await coupon.checkBalances(accounts[1]);
 
-      assert.equal(initialBalance - balancesUsed, balancesLeft, 'balance not match');
+      // Assertions
+      assert.equal(balancesUsed, 10000 * (10 ** uint256(DECIMALS)), 'balancesUsed incorrect');
+      assert.equal(balances, 0, 'balances incorrect and not empty');
     }
   });
 
-
+  
 
 })

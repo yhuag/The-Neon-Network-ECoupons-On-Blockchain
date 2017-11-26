@@ -12,7 +12,7 @@ contract Coupon is StandardToken {
 
   uint8 public constant DECIMALS = 18;
   uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
-  address public constant ISSUER_ADDRESS = "0x8484345ec508cd007470b2eab04ddb61b5198305";  // TODO: To be changed
+  address public constant ISSUER_ADDRESS = 0x8484345ec508cd007470b2eab04ddb61b5198305;  // TODO: To be changed
 
 
   // Balance for each account
@@ -39,7 +39,7 @@ contract Coupon is StandardToken {
 
   // Check whether the amount is an integral number of units.
   modifier isValidRedeemAmount(uint256 _amount){
-    require(_amount.mod(unit) == 0);
+    require(_amount % unit == 0);
     _;
   }
 
