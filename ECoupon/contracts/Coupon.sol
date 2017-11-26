@@ -12,7 +12,7 @@ contract Coupon is StandardToken {
 
   uint8 public constant DECIMALS = 18;
   uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
-  address public constant ISSUER_ADDRESS = "0x4f57142ec0587cc0a670374d15a8d0d6cec0704e";  // TODO: To be changed
+  address public constant ISSUER_ADDRESS = "0x8484345ec508cd007470b2eab04ddb61b5198305";  // TODO: To be changed
 
 
   // Balance for each account
@@ -54,12 +54,22 @@ contract Coupon is StandardToken {
     unit = _unit;
   }
 
-  // Update the balances/balancesUsed of the user when coupon redeemed
-  function redeem(uint256 amount) public isValidRedeemTime isValidRedeemAmount(amount) returns (bool success) {
+  // Update the balances/balancesUsed of the user when coupon redeemed (Partial)
+  function redeemPartialByUnit(uint256 amount) public isValidRedeemTime isValidRedeemAmount(amount) returns (bool success) {
     require(balances[msg.sender] >= amount);
 
     balancesUsed[msg.sender] = balancesUsed[msg.sender].add(amount);
     balances[msg.sender] = balances[msg.sender].sub(amount);
+
+    success = true; 
+  }
+
+  // Update the balances/balancesUsed of the user when coupon redeemed (Complete)
+  function redeemComplete() public isValidRedeemTime returns (bool success) {
+    require(balances[msg.sender] >= INITIAL_SUPPLY);
+
+    balancesUsed[msg.sender] = balancesUsed[msg.sender].add(INITIAL_SUPPLY);
+    balances[msg.sender] = balances[msg.sender].sub(INITIAL_SUPPLY);
 
     success = true; 
   }
