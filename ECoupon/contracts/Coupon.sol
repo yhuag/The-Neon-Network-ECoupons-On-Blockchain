@@ -13,7 +13,10 @@ contract Coupon is StandardToken {
   uint8 public constant DECIMALS = 18;
   uint256 public constant INITIAL_SUPPLY_RAW = 10000;
   uint256 public constant INITIAL_SUPPLY = INITIAL_SUPPLY_RAW * (10 ** uint256(DECIMALS));
-  address public constant ISSUER_ADDRESS = 0x8484345ec508cd007470b2eab04ddb61b5198305;  // TODO: To be changed
+  address public constant ISSUER_ADDRESS = 0xd8df6780a778ebfb9a4f6b3b218d5d0995ba800a;  // TODO: To be changed
+
+  // uint256 public INITIAL_SUPPLY;  // TODO: Should be constant
+  // address public ISSUER_ADDRESS;  // TODO: Should be constant
 
 
   // Balance for each account
@@ -43,6 +46,7 @@ contract Coupon is StandardToken {
 
   // Check whether the amount is an integral number of units.
   modifier isValidRedeemAmount(uint256 _amount){
+    // require(15000 % 10000 == 0);
     require(_amount % unit == 0);
     _;
   }
@@ -52,6 +56,11 @@ contract Coupon is StandardToken {
   function Coupon(uint256 _startTime, uint256 _endTime, address user, uint256 _unit) onlyIssuer {
     require(_endTime >= _startTime);
 
+    // // Anchor constant
+    // INITIAL_SUPPLY = _initSupply;
+    // ISSUER_ADDRESS = msg.sender;
+
+    // Init
     balances[user] = INITIAL_SUPPLY; 
     totalSupply = totalSupply.add(INITIAL_SUPPLY);  // The supply of a newly created coupon adds to totalSupply of the coupon system
     startTime = _startTime;
@@ -83,13 +92,13 @@ contract Coupon is StandardToken {
 
 
   // Only the issuer can check the balance of a specific user
-  function checkBalances(address user) onlyIssuer constant returns (uint256 _balances) {
+  function checkBalances(address user) public onlyIssuer constant returns (uint256 _balances) {
     _balances = balances[user];
   }
 
 
   // Only the issuer can check the balanceUsed of a specific user
-  function checkBalancesUsed(address user) onlyIssuer constant returns (uint256 _balancesUsed) {
+  function checkBalancesUsed(address user) public onlyIssuer constant returns (uint256 _balancesUsed) {
     _balancesUsed = balancesUsed[user];
   }
 

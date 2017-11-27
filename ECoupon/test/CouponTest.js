@@ -3,6 +3,7 @@ var Web3 = require('web3');
 var web3 = new Web3(
   new Web3.providers.HttpProvider('http://localhost:8545')
 );
+const chai = require('chai');
 
 contract('Coupon', function (accounts) {
 
@@ -21,7 +22,7 @@ contract('Coupon', function (accounts) {
     // Create coupon
     var startTime = web3.eth.getBlock("latest").timestamp;
     var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
-    let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000);
+    let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000 * (10 ** DECIMALS));
 
     // Redeem completely
     var receipt = await coupon.redeemComplete({ from: accounts[1] });
@@ -41,42 +42,35 @@ contract('Coupon', function (accounts) {
     // Create coupon
     var startTime = web3.eth.getBlock("latest").timestamp;
     var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
-    let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000);
+    let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000 * (10 ** DECIMALS));
 
     // Redeem completely
-    var receipt = await coupon.redeemPartialByUnit(1000 * (10 ** DECIMALS), { from: accounts[1] });
+    var receipt = await coupon.redeemPartialByUnit(3000 * (10 ** DECIMALS), { from: accounts[1] });
 
     // Inits
     var balancesUsed = await coupon.checkBalancesUsed(accounts[1]);
     var balances = await coupon.checkBalances(accounts[1]);
 
     // Assertions
-    assert.equal(balancesUsed.toNumber(), 1000 * (10 ** DECIMALS), 'balancesUsed incorrect');
-    assert.equal(balances.toNumber(), 9000 * (10 ** DECIMALS), 'balances incorrect and not empty');
+    assert.equal(balancesUsed.toNumber(), 3000 * (10 ** DECIMALS), 'balancesUsed incorrect');
+    assert.equal(balances.toNumber(), 7000 * (10 ** DECIMALS), 'balances incorrect and not empty');
   });
 
 
   // Test Partial Redeem (should NOT success)
-  // it('redeem coupon partially', async function () {
-  //   // Create coupon
-  //   var startTime = web3.eth.getBlock("latest").timestamp;
-  //   var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
-  //   let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000);
+  it('redeem coupon partially', async function () {
+    // Create coupon
+    var startTime = web3.eth.getBlock("latest").timestamp;
+    var endTime = startTime + 60 * 60 * 60 * 1000; // endTime is 1 hour after startTime
+    let coupon = await Coupon.new(startTime, endTime, accounts[1], 1000 * (10 ** DECIMALS));
 
-  //   // Redeem completely
-  //   var receipt = await coupon.redeemPartialByUnit(1500 * (10 ** DECIMALS), { from: accounts[1] });
+    // Redeem partially but incorrect amount (not integer times of the unit)
+    var errFunc = async function() { return await coupon.redeemPartialByUnit(1500 * (10 ** DECIMALS)); }
 
-  //   console.log((1500 * (10 ** DECIMALS)) % (1000 * (10 ** DECIMALS)) == 0);
-
-  //   console.log(receipt);
-
-  //   // Inits
-  //   var balancesUsed = await coupon.checkBalancesUsed(accounts[1]);
-  //   var balances = await coupon.checkBalances(accounts[1]);
-
-  //   // Assertions
-  //   assert.equal(balancesUsed.toNumber(), 1000 * (10 ** DECIMALS), 'balancesUsed incorrect');
-  //   assert.equal(balances.toNumber(), 9000 * (10 ** DECIMALS), 'balances incorrect and not empty');
-  // });
+    // Expectation
+    // errFunc();
+    // chai.expect(errFunc).to.eventually.throw('Error: VM Exception while processing transaction: invalid opcode');
+    chai.expect(errFunc).to.be.rejected();
+  });
 
 })
