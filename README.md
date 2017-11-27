@@ -9,12 +9,6 @@ This is a University Research Project on e-coupons
 5. run `truffle test` under the `ECoupon` directory to execute the test script
 6. You should see the testing result `passing` soon!
 
-# Issue & Bug-shooting
-## Solving Port Conflict
-1. Run `lsof -i tcp:8545` to check whether any process is occupying port 8545
-2. Identify the process id `PID` and run `kill <PID>` to kill the process
-3. This will release the resource for testrpc to run on port 8545
-
 # Test Cases
 ## Compilation, Deplyment and Logon to the testnet
 ```
@@ -55,3 +49,9 @@ coupon_new.redeemPartialByUnit(1000*10**18, {from: accounts[1]})
 coupon_new.checkBalances(accounts[1])   // Should be 9000
 coupon_new.checkBalancesUsed(accounts[1])   // Should be 1000
 ```
+
+# Issue & Bug-shooting
+## Solving Port Conflict
+1. Run `lsof -i tcp:8545` to check whether any process is occupying port 8545
+2. Identify the process id `PID` and run `kill <PID>` to kill the process
+3. This will release the resource for testrpc to run on port 8545
