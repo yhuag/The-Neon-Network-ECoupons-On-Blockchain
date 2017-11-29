@@ -1,5 +1,5 @@
-# Ethereum-HyperIntelligent-Contract-Research
-This is a Ethereum Research Project on E-Coupon and secure value distribution gateway at [HKUST](http://www.ust.hk/). With the supervision of [Professor HUI Pan](https://www.cse.ust.hk/~panhui/) and [Dr. CHATZOPOULOS](http://www.cse.ust.hk/~dcab/) I co-author the research with [Tina Lee](https://github.com/tina1998612).
+# Ethereum Hyper-Intelligent Contract Research
+This is a Ethereum Research Project on E-Coupon and secure value distribution gateway at [HKUST](http://www.ust.hk/). With the supervision of [Professor HUI Pan](https://www.cse.ust.hk/~panhui/) and [Dr. CHATZOPOULOS](http://www.cse.ust.hk/~dcab/). I co-author the research with [Tina Lee](https://github.com/tina1998612).
 
 # Development & Testing
 1. First clone the repository or download as zip file
