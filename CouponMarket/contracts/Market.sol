@@ -8,6 +8,7 @@ contract Market {
     //   address[] public users;  // store user addresses
     mapping (uint256 => address) coupons;   // store coupon IDs --> coupon addresses
 
+    event createCouponAddress(address _address);
     // Constructor
     function Market() public {
         volume = 0;
@@ -20,8 +21,10 @@ contract Market {
     }
 
     // Coupon creater
-    function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public returns (address) {
-        return new Coupon(getNextID(), startTime, endTime, value);
+    function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public {
+        //Coupon coupon = new Coupon(getNextID(), startTime, endTime, value);
+        address _address = new Coupon(getNextID(), startTime, endTime, value);
+        createCouponAddress(_address);
     }
 
     // Coupon register
