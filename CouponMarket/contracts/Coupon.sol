@@ -44,7 +44,7 @@ contract Coupon is StandardToken {
   }
 
   // receiver is the owner to be changed to 
-  function changeOwner(address _receiver) onlyOwner() {
+  function changeOwner(address _receiver) onlyOwner {
       owner = _receiver;
   }
 
