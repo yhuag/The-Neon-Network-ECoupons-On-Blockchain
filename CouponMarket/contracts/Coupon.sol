@@ -2,7 +2,7 @@ pragma solidity ^0.4.13;
 
 contract Coupon {
   // Configuration
-  uint256 ID;
+  uint256 public ID;
   address public issuer;
   address public owner;
   uint256 public startTime;
