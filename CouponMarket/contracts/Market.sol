@@ -21,8 +21,7 @@ contract Market {
 
     // Coupon creater
     function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public returns (address) {
-        Coupon coupon = new Coupon(getNextID(), startTime, endTime, value);
-        return coupon;
+        return new Coupon(getNextID(), startTime, endTime, value);
     }
 
     // Coupon register
