@@ -30,6 +30,9 @@ contract Market {
         coupons[couponID] = couponAddress;
     }
 
+    // Track coupon
+    // function 
+
     // Tracker
     // function getIssuer(uint256 couponID) public returns (address) {
     //     coupons[couponID]
