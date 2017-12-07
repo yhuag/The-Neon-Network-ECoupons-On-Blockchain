@@ -1,8 +1,6 @@
 pragma solidity ^0.4.13;
 
-import 'zeppelin-solidity/contracts/token/StandardToken.sol';
-
-contract Coupon is StandardToken {
+contract Coupon {
   // Configuration
   uint256 ID;
   address issuer;
@@ -28,10 +26,7 @@ contract Coupon is StandardToken {
     _;
   } 
 
-  // Constructor: 
-  /**
-   * @param {int} ID - coupon ID.
-   */
+  // Constructor
   function Coupon(uint256 id, uint256 _startTime, uint256 _endTime, uint256 _value) {
     require(_endTime >= _startTime);
 

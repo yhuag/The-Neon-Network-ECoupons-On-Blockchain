@@ -1,0 +1,95 @@
+{
+  "contract_name": "Market",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "getNextID",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "couponID",
+          "type": "uint256"
+        },
+        {
+          "name": "couponAddress",
+          "type": "address"
+        }
+      ],
+      "name": "registerCoupon",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "name": "endTime",
+          "type": "uint256"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "createCoupon",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "volume",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b600080555b5b6103c3806100256000396000f300606060405263ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416632b0b086e811461005e578063477976f31461008357806394c6b7e0146100db578063c618a1e414610120575b600080fd5b341561006957600080fd5b610071610145565b60405190815260200160405180910390f35b341561008e57600080fd5b6100b260043573ffffffffffffffffffffffffffffffffffffffff60243516610154565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b34156100e657600080fd5b6100b260043560243560443561019c565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b341561012b57600080fd5b6100716101f5565b60405190815260200160405180910390f35b60008054600101908190555b90565b6000828152600160205260408120805473ffffffffffffffffffffffffffffffffffffffff191673ffffffffffffffffffffffffffffffffffffffff84161790555b92915050565b6000806101a7610145565b8585856101b26101fb565b80858152602001848152602001838152602001828152602001945050505050604051809103906000f08015156101e757600080fd5b90508091505b509392505050565b60005481565b60405161018c8061020c8339019056006060604052341561000f57600080fd5b60405160808061018c833981016040528080519190602001805191906020018051919060200180519150505b8282101561004857600080fd5b600084905560018054600160a060020a033316600160a060020a031991821681179092556002805490911690911790556003839055600482905560058190555b505050505b60f18061009b6000396000f300606060405263ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663a6f9dae18114603c575b600080fd5b3415604657600080fd5b606573ffffffffffffffffffffffffffffffffffffffff600435166067565b005b6002543373ffffffffffffffffffffffffffffffffffffffff908116911614608b57fe5b6002805473ffffffffffffffffffffffffffffffffffffffff191673ffffffffffffffffffffffffffffffffffffffff83161790555b5b505600a165627a7a72305820b2a0f4f427e4a879f25f44a3c8945cb6aafeca20d35965c15f9b60470ff500940029a165627a7a72305820a50462635be550ba72d9adf3276acc087ccc81bb7428816aaa64d3d1c6cf576b0029",
+  "networks": {
+    "1512669366372": {
+      "events": {},
+      "links": {},
+      "address": "0x0970189a9615ce819cb8a941cb8d81a4df2d31ec",
+      "updated_at": 1512669377320
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1512669377320
+}
