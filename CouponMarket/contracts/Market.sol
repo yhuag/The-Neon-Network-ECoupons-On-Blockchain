@@ -4,30 +4,35 @@ import "./Coupon.sol";
 
 contract Market {
 
-  uint public volume;   // total volume of coupons
-  address[] public users;  // store user addresses
-  mapping (uint => address) coupons;   // store coupon IDs --> coupon addresses
+    uint256 public volume;   // total volume of coupons
+    //   address[] public users;  // store user addresses
+    mapping (uint256 => address) coupons;   // store coupon IDs --> coupon addresses
 
     // Constructor
     function Market() public {
         volume = 0;
     }
 
-    // Coupon creater
-    function createCoupon() public returns (address) {
-        Coupon coupon = new Coupon();
+    // Get Available ID
+    function getNextID() returns (uint256) {
         ++volume;   // Increment total volume
+        return volume;
+    }
+
+    // Coupon creater
+    function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public returns (address) {
+        Coupon coupon = new Coupon(getNextID(), startTime, endTime, value);
         return coupon;
     }
 
     // Coupon register
-    function registerCoupon(uint couponId, address couponAddress) public returns (address) {
-        coupons[couponId] = couponAddress;
+    function registerCoupon(uint256 couponID, address couponAddress) public returns (address) {
+        coupons[couponID] = couponAddress;
     }
 
     // Tracker
-    // function getIssuer(uint couponId) public returns (address) {
-    //     coupons[couponId]
+    // function getIssuer(uint256 couponID) public returns (address) {
+    //     coupons[couponID]
     // }
 
 }
