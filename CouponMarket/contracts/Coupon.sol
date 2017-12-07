@@ -46,7 +46,17 @@ contract Coupon is StandardToken {
   }
 
   // receiver is the owner to be changed to 
-  function changeOwner(address _receiver) onlyOwner {
-      owner = _receiver;
+  function changeOwnerTo(address receiver) onlyOwner {
+    owner = receiver;
+  }
+
+  // redeem the coupon
+  function redeem() onlyOwner {
+    changeOwnerTo(issuer);
+  }
+
+  // transfer the coupon ownership
+  function transfer(address receiver) onlyOwner {
+    changeOwnerTo(receiver);
   }
 }
