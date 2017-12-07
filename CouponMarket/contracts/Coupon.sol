@@ -11,10 +11,12 @@ contract Coupon is StandardToken {
   uint256 endTime;
   uint256 value;
 
+  // Functions with this modifier can only be executed by the owner
   modifier onlyOwner(){
       assert(owner == msg.sender);
       _;
   }
+
   // Functions with this modifier can only be executed by the issuer
   modifier onlyIssuer() {
     assert(issuer == msg.sender);
@@ -36,7 +38,7 @@ contract Coupon is StandardToken {
     require(_endTime >= _startTime);
 
     ID = id;
-    issuer =  msg.sender;
+    issuer =  msg.sender;   // issuer is default to be the owner of the coupon
     owner = msg.sender;
     startTime =  _startTime;
     endTime =  _endTime;
