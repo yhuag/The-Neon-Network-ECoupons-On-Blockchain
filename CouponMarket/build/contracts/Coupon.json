@@ -1,0 +1,51 @@
+{
+  "contract_name": "Coupon",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_receiver",
+          "type": "address"
+        }
+      ],
+      "name": "changeOwner",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "_startTime",
+          "type": "uint256"
+        },
+        {
+          "name": "_endTime",
+          "type": "uint256"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "constructor"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b60405160808061018c833981016040528080519190602001805191906020018051919060200180519150505b8282101561004857600080fd5b600084905560018054600160a060020a033316600160a060020a031991821681179092556002805490911690911790556003839055600482905560058190555b505050505b60f18061009b6000396000f300606060405263ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663a6f9dae18114603c575b600080fd5b3415604657600080fd5b606573ffffffffffffffffffffffffffffffffffffffff600435166067565b005b6002543373ffffffffffffffffffffffffffffffffffffffff908116911614608b57fe5b6002805473ffffffffffffffffffffffffffffffffffffffff191673ffffffffffffffffffffffffffffffffffffffff83161790555b5b505600a165627a7a72305820b2a0f4f427e4a879f25f44a3c8945cb6aafeca20d35965c15f9b60470ff500940029",
+  "networks": {
+    "1512669366372": {
+      "events": {},
+      "links": {},
+      "address": "0x6c259e0f0657cd686e7de412533c1bcd3b087d8a",
+      "updated_at": 1512669377320
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1512669377320
+}
