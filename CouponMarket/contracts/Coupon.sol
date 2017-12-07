@@ -49,27 +49,4 @@ contract Coupon is StandardToken {
   function changeOwner(address _receiver) onlyOwner {
       owner = _receiver;
   }
-
-//   // Only the issuer can check the balance of a specific user
-//   function checkBalances(address user) public onlyIssuer constant returns (uint256 _balances) {
-//     _balances = balances[user];
-//   }
-
-
-//   // Only the issuer can check the balanceUsed of a specific user
-//   function checkBalancesUsed(address user) public onlyIssuer constant returns (uint256 _balancesUsed) {
-//     _balancesUsed = balancesUsed[user];
-//   }
-
-
-//   // Anyone can check their personal balances
-//   function getAccountBalances() public constant returns (uint256 _balances) {
-//     _balances = balances[msg.sender];
-//   }
-
-
-//   // Anyone can check their personal balances
-//   function getAccountBalancesUsed() public constant returns (uint256 _balances) {
-//     _balances = balancesUsed[msg.sender];
-//   }
 }
