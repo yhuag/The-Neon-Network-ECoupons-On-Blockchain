@@ -3,11 +3,11 @@ pragma solidity ^0.4.13;
 contract Coupon {
   // Configuration
   uint256 ID;
-  address issuer;
-  address owner;
-  uint256 startTime;
-  uint256 endTime;
-  uint256 value;
+  address public issuer;
+  address public owner;
+  uint256 public startTime;
+  uint256 public endTime;
+  uint256 public value;
 
   // Functions with this modifier can only be executed by the owner
   modifier onlyOwner(){
@@ -41,17 +41,17 @@ contract Coupon {
   }
 
   // receiver is the owner to be changed to 
-  function changeOwnerTo(address receiver) onlyOwner {
+  function changeOwnerTo(address receiver) public onlyOwner {
     owner = receiver;
   }
 
   // redeem the coupon
-  function redeem() onlyOwner {
+  function redeem() public onlyOwner {
     changeOwnerTo(issuer);
   }
 
   // transfer the coupon ownership
-  function transfer(address receiver) onlyOwner {
+  function transfer(address receiver) public onlyOwner {
     changeOwnerTo(receiver);
   }
 }
