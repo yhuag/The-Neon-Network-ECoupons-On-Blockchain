@@ -11,5 +11,9 @@ contract('Coupon', function(accounts) {
     assert.equal(0, volume, "volume is not zero");
   });
 
-  
+  it("Market Next ID Test", async function() {
+    let market = await Market.new();
+    var volume = await market.getNextID.call();
+    assert.equal(1, volume, "volume should be 1");
+  });
 });
