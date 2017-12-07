@@ -16,12 +16,12 @@ contract('Market', function(accounts) {
     assert.equal(volume, 1, "volume should be 1");
   });
 
-  it("Market Create Coupon Test", async function() {
-    let market = await Market.new();
-    var coupon = await market.createCoupon(0, 10, 10);
-    var contractAddress = coupon.logs[0].address;
-    assert.notEqual(contractAddress, null, "contract address should not be null");
-  });
+  // it("Market Create Coupon Test", async function() {
+  //   let market = await Market.new();
+  //   var coupon = await market.createCoupon(0, 10, 10);
+  //   var contractAddress = coupon.logs[0].address;
+  //   assert.notEqual(contractAddress, null, "contract address should not be null");
+  // });
 });
 
 contract('Coupon', function(accounts) {
