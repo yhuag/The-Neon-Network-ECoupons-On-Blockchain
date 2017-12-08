@@ -2,14 +2,16 @@
 import "../stylesheets/app.css";
 
 // Import libraries we need.
-import { default as Web3} from 'web3';
+import { default as Web3 } from 'web3';
 import { default as contract } from 'truffle-contract'
 
 // Import our contract artifacts and turn them into usable abstractions.
 import Market_artifacts from '../../build/contracts/Market.json'
+import Coupon_artifacts from '../../build/contracts/Coupon.json'
 
 // Market is our usable abstraction, which we'll use through the code below.
 var Market = contract(Market_artifacts);
+var Coupon = contract(Coupon_artifacts);
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
@@ -18,14 +20,15 @@ var accounts;
 var account;
 
 window.App = {
-  start: function() {
+  start: function () {
     var self = this;
 
     // Bootstrap the Market abstraction for Use.
-    Market.setProvider(web3.currentProvider);
+    Market.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+    Coupon.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
 
     // Get the initial account balance so it can be displayed.
-    web3.eth.getAccounts(function(err, accs) {
+    web3.eth.getAccounts(function (err, accs) {
       if (err != null) {
         alert("There was an error fetching your accounts.");
         return;
@@ -38,39 +41,36 @@ window.App = {
 
       accounts = accs;
       account = accounts[0];
-
-      self.refreshBalance();
     });
   },
 
-  setStatus: function(message) {
+  setStatus: function (message) {
     var status = document.getElementById("status");
     status.innerHTML = message;
   },
 
-  hi: async function() {
+  newCoupon: async function (startTime = 0, endTime = 10, value = 10) {
     // Create market
     let market = await Market.deployed();
-  
-    // Create coupon
-    var couponReceipt = await market.createCoupon(0, 10, 10); // startTime, endTime, value
 
-    // Get coupon ID and Address
-    var couponID = couponReceipt.logs[0].args.id.toNumber();
-    var couponAddr = couponReceipt.logs[0].args.new_address;
+    var coupon_info = {};
+    // // Set coupon default issuer
+    coupon_info.issuer = accounts[0];
+
+    // Create coupon
+    var couponReceipt = await market.createCoupon(startTime, endTime, value, { from: account, gas: 1000000 });
+
+    // Get coupon ID, Address, and owner
+    coupon_info.ID = couponReceipt.logs[0].args.id.toNumber();
+    coupon_info.address = couponReceipt.logs[0].args.new_address;
 
     // Get coupon instance
-    var coupon = Coupon.at(couponAddr);
-
-    // Get current owner
-    var owner = await coupon.owner.call();
-
-    // "Transfer" the coupon ownership from the issuer
-    var receipt = await coupon.transfer(accounts[1], {from: owner});
-
-    // Get receiver and validate
-    var receiver = await coupon.owner.call(); // should = accounts[1]
+    var coupon = Coupon.at(coupon_info.address);
+    coupon_info.owner = await coupon.owner.call();
+    return coupon_info;
   },
+
+
 
   // refreshBalance: function() {
   //   var self = this;
@@ -110,7 +110,7 @@ window.App = {
   // }
 };
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 Market, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
