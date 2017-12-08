@@ -50,8 +50,7 @@ window.App = {
   },
 
   getAccs: async function () {
-    var accs = await web3.eth.getAccounts();
-    return accs;
+    return web3.eth.accounts;
   },
 
   newCoupon: async function (value = 10, startTime = 0, endTime = 10) {
