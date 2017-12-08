@@ -80,9 +80,9 @@ window.App = {
     return coupon_info;
   },
 
-  transfer: async function (holderAddr, receiverAddr) {
+  transfer: async function (couponAddr, receiverAddr) { // return true if success
     // Get coupon instance
-    var coupon = Coupon.at(holderAddr);
+    var coupon = Coupon.at(couponAddr);
     var owner = await coupon.owner.call();
 
     // "Transfer" the coupon ownership from the issuer
@@ -93,14 +93,15 @@ window.App = {
     return receiver == receiverAddr;
   },
 
-  redeem: async function (holderAddr) {
-    var coupon = Coupon.at(holderAddr);
+  redeem: async function (couponAddr) { // return true if success
+    var coupon = Coupon.at(couponAddr);
     // "Redeem" the coupon 
-    var receipt = await coupon.redeem({ from: receiver });
+    var receipt = await coupon.redeem({ from: couponAddr });
 
     // Get current owner and validate
     var owner = await coupon.owner.call();
-    assert.equal(owner, issuer, "owner should be the issuer after redeem action");
+    var issuer = await coupon.issuer.call();
+    return owner == issuer;
   },
 
 
