@@ -56,7 +56,7 @@ contract('Coupon', function(accounts) {
 contract('Integration', function(accounts) {
   it("Coupon Transfer Test", async function() {
     // Create market
-    let market = await Market.new();
+    let market = await Market.deployed();
   
     // Create coupon
     var couponReceipt = await market.createCoupon(0, 10, 10);
