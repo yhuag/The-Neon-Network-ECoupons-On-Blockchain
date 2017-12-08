@@ -160,7 +160,7 @@ window.addEventListener('load', async function () {
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
   } else {
-    console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+    // console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
   }
@@ -186,8 +186,8 @@ window.addEventListener('load', async function () {
     $('#coupon_info > tbody:last-child').append(`
       <tr>
         <td>` + coupon_info.ID + `</td>
-        <td><img class="profile_img_align_center" src="/img/`+ accounts.indexOf(coupon_info.owner) + `.png" width="20" height="20" align="middle"> `+coupon_info.owner+`</td>
-        <td><img class="profile_img_align_center" src="/img/`+ accounts.indexOf(coupon_info.issuer) + `.png" width="20" height="20" align="middle"> `+coupon_info.issuer+`</td>
+        <td><img class="profile_img_align_center" src="/img/`+ accounts.indexOf(coupon_info.owner) + `.png" width="20" height="20" align="middle"> ` + coupon_info.owner + `</td>
+        <td><img class="profile_img_align_center" src="/img/`+ accounts.indexOf(coupon_info.issuer) + `.png" width="20" height="20" align="middle"> ` + coupon_info.issuer + `</td>
         <td>`+ coupon_info.value + `</td>
         <td>`+ coupon_info.startTime + `</td>
         <td>`+ coupon_info.endTime + `</td>
@@ -206,7 +206,7 @@ window.addEventListener('load', async function () {
   //   });
   // });
 
-  
+
 
   $('#create_coupon').click(async function () {
     console.log('create coupon btn clicked!');
@@ -223,7 +223,7 @@ window.addEventListener('load', async function () {
     var coupon_info = {};
 
     coupon_info.ID = _couponID;
-    coupon_info.owner = await App.getOwnerAddr(_couponID);      
+    coupon_info.owner = await App.getOwnerAddr(_couponID);
     coupon_info.issuer = await App.getIssuerAddr(_couponID);
     coupon_info.value = await App.getCouponValue(_couponID);
     coupon_info.startTime = await App.getStartTime(_couponID);
@@ -248,7 +248,7 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-    if(success) {
+    if (success) {
       appendUpdatedCouponInfoByID(couponID);
     }
   });
@@ -268,7 +268,7 @@ window.addEventListener('load', async function () {
     var success = await App.redeem(couponID);
     console.log(success);
 
-    if(success) {
+    if (success) {
       appendUpdatedCouponInfoByID(couponID);
     }
   });
