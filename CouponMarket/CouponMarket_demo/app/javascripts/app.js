@@ -70,6 +70,17 @@ window.App = {
     return coupon_info;
   },
 
+  transfer: async function (couponAddr, receiverAddr) {
+    // Get coupon instance
+    var coupon = Coupon.at(couponAddr);
+    var owner = await coupon.owner.call();
+
+    // "Transfer" the coupon ownership from the issuer
+    var receipt = await coupon.transfer(receiverAddr, { from: owner });
+
+    // Get receiver and validate
+    var receiver = await coupon.owner.call();
+  },
 
 
 
