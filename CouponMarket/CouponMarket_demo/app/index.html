@@ -25,18 +25,19 @@
   <body>
     <form id="create_coupon_form">
       <div class="form-group col-xs-2 col-md-2">
-        <label for="name" class="control-label">Value</label>
+        <label for="value" class="control-label">Value</label>
         <input type="text" value='' class="form-control" id="value" placeholder="100">
       </div>
       <div class="form-group col-xs-2 col-md-2">
-        <label for="name" class="control-label">Start time</label>
+        <label for="startTime" class="control-label">Start time</label>
         <input type="text" value='' class="form-control" id="startTime" placeholder="0">
       </div>
       <div class="form-group col-xs-2 col-md-2">
-        <label for="name" class="control-label">End time</label>
+        <label for="endTime" class="control-label">End time</label>
         <input type="text" value='' class="form-control" id="endTime" placeholder="10">
       </div>
       <div class="form-group col-xs-2 col-md-2">
+        <label for="hi" class="control-label" style="color:white">none</label>
         <button type="submit " class="btn btn-default">Create coupon</button>
       </div>
     </form>
@@ -54,7 +55,6 @@
             <th>value</th>
             <th>startTime</th>
             <th>endTime</th>
-
           </tr>
         </thead>
         <tbody>
@@ -64,12 +64,12 @@
 
     </div>
 
-    <span id=" status "></span>
+    <span id="status"></span>
 
     <script>
       $('#create_coupon_form').submit(async function () {
         console.log('clicked!');
-        var value = $('#value').val() || 10;
+        var value = $('#value').val() || 100;
         var startTime = $('#startTime').val() || 0;
         var endTime = $('#endTime').val() || 10;
         var coupon_info = await App.newCoupon(value, startTime, endTime);
