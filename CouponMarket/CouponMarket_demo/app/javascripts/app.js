@@ -41,12 +41,17 @@ window.App = {
 
       accounts = accs;
       account = accounts[0];
+      console.log(accounts)
     });
   },
 
   setStatus: function (message) {
     var status = document.getElementById("status");
     status.innerHTML = message;
+  },
+
+  getAccs: function () {
+    return accounts;
   },
 
   newCoupon: async function (value = 10, startTime = 0, endTime = 10) {
@@ -75,9 +80,9 @@ window.App = {
     return coupon_info;
   },
 
-  transfer: async function (senderAddr, receiverAddr) {
+  transfer: async function (holderAddr, receiverAddr) {
     // Get coupon instance
-    var coupon = Coupon.at(senderAddr);
+    var coupon = Coupon.at(holderAddr);
     var owner = await coupon.owner.call();
 
     // "Transfer" the coupon ownership from the issuer
@@ -88,8 +93,14 @@ window.App = {
     return receiver == receiverAddr;
   },
 
-  redeem: async function () {
+  redeem: async function (holderAddr) {
+    var coupon = Coupon.at(holderAddr);
+    // "Redeem" the coupon 
+    var receipt = await coupon.redeem({ from: receiver });
 
+    // Get current owner and validate
+    var owner = await coupon.owner.call();
+    assert.equal(owner, issuer, "owner should be the issuer after redeem action");
   },
 
 

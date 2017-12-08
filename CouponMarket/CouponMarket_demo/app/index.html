@@ -67,13 +67,17 @@
     <span id="status"></span>
 
     <script>
-      $('#create_coupon').click(async function () {
-        console.log('clicked!');
-        var value = $('#value').val() || 100;
-        var startTime = $('#startTime').val() || 0;
-        var endTime = $('#endTime').val() || 10;
-        var coupon_info = await App.newCoupon(value, startTime, endTime);
-        $('#coupon_info > tbody:last-child').append(`
+      $(document).ready(async function () {
+        var accounts = await App.getAccs();
+        console.log(accounts);
+
+        $('#create_coupon').click(async function () {
+          console.log('clicked!');
+          var value = $('#value').val() || 100;
+          var startTime = $('#startTime').val() || 0;
+          var endTime = $('#endTime').val() || 10;
+          var coupon_info = await App.newCoupon(value, startTime, endTime);
+          $('#coupon_info > tbody:last-child').append(`
         <tr>
           <td>`+ coupon_info.ID + `</td>
           <td>`+ coupon_info.owner + `</td>
@@ -84,9 +88,13 @@
         </tr>
         `);
 
-        console.log(coupon_info);
-        return false;
+          console.log(coupon_info);
+          return false;
+        });
+
       });
+
+
 
     </script>
   </body>
