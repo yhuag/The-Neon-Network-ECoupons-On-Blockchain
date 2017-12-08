@@ -186,3 +186,9 @@ label {
   box-sizing: border-box; */
 }
 
+#startTime {
+    margin-top: -16px;
+}
+#endTime {
+    margin-top: -16px;
+}
