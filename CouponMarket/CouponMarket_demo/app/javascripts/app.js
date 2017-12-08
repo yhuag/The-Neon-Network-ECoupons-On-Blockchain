@@ -151,6 +151,8 @@ window.App = {
   },
 };
 
+
+
 window.addEventListener('load', async function () {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
@@ -193,6 +195,19 @@ window.addEventListener('load', async function () {
     `);
   }
 
+  // var colorStr = '#DDDDFF'; // color of highlight  
+  // $('#coupon_info').bind('rowAddOrRemove', function(event){
+  //   $("tr").each(function (i,x) {
+  //     $(this).css("background-color",colorStr);
+  //     setTimeout(function(){
+  //         $(x).css("background-color","#ffffff"); // reset background
+  //         $(x).effect("highlight", {color: colorStr}, 3000); // animate
+  //     },3000);
+  //   });
+  // });
+
+  
+
   $('#create_coupon').click(async function () {
     console.log('create coupon btn clicked!');
     var value = $('#value').val() || 100;
@@ -213,7 +228,7 @@ window.addEventListener('load', async function () {
     coupon_info.value = await App.getCouponValue(_couponID);
     coupon_info.startTime = await App.getStartTime(_couponID);
     coupon_info.endTime = await App.getEndTime(_couponID);
-    
+
     appendCouponInfo(coupon_info);
   }
 
