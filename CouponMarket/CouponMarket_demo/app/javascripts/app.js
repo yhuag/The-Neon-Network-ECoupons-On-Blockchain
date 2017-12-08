@@ -183,9 +183,9 @@ window.addEventListener('load', async function () {
   function appendCouponInfo(coupon_info) {
     $('#coupon_info > tbody:last-child').append(`
       <tr>
-        <td>`+ coupon_info.ID + `</td>
-        <td>`+ coupon_info.owner + `</td>
-        <td>`+ coupon_info.issuer + `</td>
+        <td>` + coupon_info.ID + `</td>
+        <td><img src="/img/`+ accounts.indexOf(coupon_info.owner) + `.png" width="20" height="20" align="middle">` + coupon_info.owner + `</td>
+        <td><img src="/img/`+ accounts.indexOf(coupon_info.issuer) + `.png" width="20" height="20" align="middle">` + coupon_info.issuer + `</td>
         <td>`+ coupon_info.value + `</td>
         <td>`+ coupon_info.startTime + `</td>
         <td>`+ coupon_info.endTime + `</td>

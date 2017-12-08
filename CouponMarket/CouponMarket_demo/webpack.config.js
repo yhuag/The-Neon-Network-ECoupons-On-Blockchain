@@ -16,8 +16,21 @@ module.exports = {
   module: {
     rules: [
       {
-       test: /\.css$/,
-       use: [ 'style-loader', 'css-loader' ]
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        loader: 'url',
+        query: {
+          limit: 100,
+          name: 'static/img/[name].[ext]?[hash:7]'
+        },
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, '../src')
+      }, {
+        test: /\.html$/,
+        loader: "html"
       }
     ],
     loaders: [
