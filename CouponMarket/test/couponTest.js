@@ -67,23 +67,9 @@ contract('Integration', function(accounts) {
     var coupon = Coupon.at(couponAddr);
 
     var owner = await coupon.owner.call();
-    console.log(owner);
+    var receipt = await coupon.transfer(accounts[1], {from: owner});
 
-    var out = await coupon.transfer(accounts[1], {from: owner});
-    console.log(out);
-    owner = await coupon.owner.call();
-    console.log(owner);
-
-
-    // couponID = couponIDObj.toNumber();
-    // console.log(couponID);
-    // let couponAddress = await market.getCouponAddrByID.call(couponID);
-    // console.log(couponAddress);
-
-    // couponIDObj = await market.createCoupon.call(0, 10, 10);
-    // couponID = couponIDObj.toNumber();
-    // console.log(couponID);
-    // couponAddress = await market.getCouponAddrByID.call(couponID);
-    // console.log(couponAddress);
+    var receiver = await coupon.owner.call();
+    assert.equal(receiver, accounts[1], "owner incorrect");
   });
 });
