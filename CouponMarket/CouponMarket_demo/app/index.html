@@ -38,13 +38,13 @@
       </div>
       <div class="form-group col-xs-2 col-md-2">
         <label for="hi" class="control-label" style="color:white">none</label>
-        <button type="submit " class="btn btn-default">Create coupon</button>
+        <input type="button" name="submit" id="create_coupon" value="Create coupon">
       </div>
     </form>
 
     <br>
 
-    <div id="coupons ">
+    <div id="coupons">
 
       <table class="table table-striped table-hover" id="coupon_info">
         <thead>
@@ -67,7 +67,7 @@
     <span id="status"></span>
 
     <script>
-      $('#create_coupon_form').submit(async function () {
+      $('#create_coupon').click(async function () {
         console.log('clicked!');
         var value = $('#value').val() || 100;
         var startTime = $('#startTime').val() || 0;
