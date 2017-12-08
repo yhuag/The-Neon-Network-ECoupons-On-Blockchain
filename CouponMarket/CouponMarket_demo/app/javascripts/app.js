@@ -130,6 +130,14 @@ window.addEventListener('load', async function () {
     $('#receiver:last-child').append(`
       <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
     `);
+
+    $('#owner_transfer:last-child').append(`
+      <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
+    `);
+
+    $('#owner_redeem:last-child').append(`
+      <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
+    `);
   }
 
   $('#create_coupon').click(async function () {
