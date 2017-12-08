@@ -63,9 +63,17 @@
           <input type="text" value='' class="form-control" id="owner" placeholder="0">
         </div>
         <div class="form-group col-md-3">
-          <label for="startTime" class="control-label">Receiver</label>
-          <input type="text" value='' class="form-control" id="receiver" placeholder="accounts[1]">
+          <!-- <label for="startTime" class="control-label">Receiver</label>
+          <input type="text" value='' class="form-control" id="receiver" placeholder="accounts[1]"> -->
+          <label for="receiver" class="control-label">Receiver</label>
+          <select class="form-control" name="receiver" id="receiver">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+          </select>
         </div>
+
         <div class="form-group col-md-3 parent-vertical-centralized">
           <label for="transfer_coupon" class="control-label" style="color:white">none</label>
           <input class="btn btn-outline-primary" type="button" name="submit" id="transfer" value="Transfer coupon">
@@ -118,6 +126,17 @@
 
   <script>
     var accounts;
+
+    $(function() {
+      console.log("ready!");
+      console.log(accounts);
+      for (var i=0;i<accounts.length;i++){
+        $('#receiver:last-child').append(`
+          <option value="audi">`+ accounts[i] +`</option>
+        `);
+      }
+    });
+
     $('#create_coupon').click(async function () {
       console.log('create coupon btn clicked!');
       var value = $('#value').val() || 100;
