@@ -178,3 +178,8 @@ label {
   float:left;
   margin-right:30px;
 }
+
+/* avatar-select */
+.avatar-select {
+  width: 100%;
+}
