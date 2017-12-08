@@ -88,6 +88,14 @@ window.App = {
     return owner;
   },
 
+  getIssuerAddr: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var owner = await coupon.owner.call();
+    return owner;
+  },
+
   transfer: async function (couponID, receiverAddr) { // return true if success
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
@@ -191,9 +199,9 @@ window.addEventListener('load', async function () {
 
     // var coupon_info;
     // coupon_info.issuer = 
-    // if(success) {
-    //   appendCouponInfo();
-    // }
+    if(success) {
+      appendCouponInfo();
+    }
 
   });
 
