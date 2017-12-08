@@ -5,23 +5,34 @@
   <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <script src="./app.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- Latest compiled and minified CSS -->
+
+  <!-- jQuery -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" type="text/css" media="all" /> 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
-
-  <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
     crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
+<<<<<<< HEAD
   <!-- ... -->
   <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
   <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
   />
+=======
+
+  <!-- Bootstrap Select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+
+>>>>>>> 7799258fff34a17eddfa527a8d63ef0e112aef36
 </head>
 
 <style>
@@ -86,14 +97,14 @@
         </div>
         <div class="form-group col-md-3">
           <label for="owner_transfer" class="control-label">Owner</label>
-          <select class="form-control" name="owner_transfer" id="owner_transfer">
+          <select class="form-control avatar-select" name="owner_transfer" id="owner_transfer">
           </select>
         </div>
         <div class="form-group col-md-3">
           <!-- <label for="startTime" class="control-label">Receiver</label>
           <input type="text" value='' class="form-control" id="receiver" placeholder="accounts[1]"> -->
           <label for="receiver" class="control-label">Receiver</label>
-          <select class="form-control" name="receiver" id="receiver">
+          <select class="form-control avatar-select" name="receiver" id="receiver">        
           </select>
         </div>
 
@@ -112,7 +123,7 @@
         </div>
         <div class="form-group col-md-3">
           <label for="owner_redeem" class="control-label">Owner</label>
-          <select class="form-control" name="owner_redeem" id="owner_redeem">
+          <select class="form-control avatar-select" name="owner_redeem" id="owner_redeem">
           </select>
         </div>
         <div class="form-group col-md-3 parent-vertical-centralized">

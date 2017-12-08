@@ -181,7 +181,7 @@ window.addEventListener('load', async function () {
 
   function appendAccountToSelect(anchor, _accounts, index) {
     $(anchor).append(`
-      <option value="`+ _accounts[index] + `">` + "Account " + index + ": " + _accounts[index] + `</option>
+      <option value="`+ _accounts[index] + `" data-class="avatar" data-style="background-image: url('/img/`+index+`.png'); background-size: 16px 16px">` + "Account " + index + ": " + _accounts[index] + `</option>
     `);
   }
 
@@ -305,6 +305,7 @@ window.addEventListener('load', async function () {
     var success = await refresh_table();
   });
 
+<<<<<<< HEAD
   $('#datetimepicker1').on("dp.change", function (e) {
     console.log(e.date);
   });
@@ -316,5 +317,34 @@ window.addEventListener('load', async function () {
     $('#startTime').datetimepicker();
     $('#endTime').datetimepicker();
   });
+=======
+  // Appearance Setup
+  $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
+    _renderItem: function( ul, item ) {
+      var li = $( "<li>" ),
+        wrapper = $( "<div>", { text: item.label } );
+
+      if ( item.disabled ) {
+        li.addClass( "ui-state-disabled" );
+      }
+
+      $( "<span>", {
+        style: item.element.attr( "data-style" ),
+        "class": "ui-icon " + item.element.attr( "data-class" )
+      })
+        .appendTo( wrapper );
+
+      return li.append( wrapper ).appendTo( ul );
+    }
+  });
+
+  $( ".avatar-select" )
+    .iconselectmenu()
+    .iconselectmenu( "menuWidget")
+      .addClass( "ui-menu-icons avatar" );
+
+  $( ".selector" ).selectmenu( "option", "width", 2000 );
+
+>>>>>>> 7799258fff34a17eddfa527a8d63ef0e112aef36
 });
 
