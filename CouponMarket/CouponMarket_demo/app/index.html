@@ -125,16 +125,10 @@
   </div>
 
   <script>
-    var accounts;
 
-    $(function() {
-      console.log("ready!");
-      console.log(accounts);
-      for (var i=0;i<accounts.length;i++){
-        $('#receiver:last-child').append(`
-          <option value="audi">`+ accounts[i] +`</option>
-        `);
-      }
+
+    $(function () {
+
     });
 
     $('#create_coupon').click(async function () {
@@ -159,7 +153,7 @@
     $('#transfer').click(async function () {
       console.log('transfer btn clicked!');
 
-      accounts = await App.getAccs();
+      var accounts = await App.getAccs();
       var couponID = $('#id').val() || 1;
       var receiver = $('#receiver').val() || accounts[1];
       var success = await App.transfer(couponID, receiver);
@@ -168,7 +162,7 @@
     $('#redeem').click(async function () {
       console.log('transfer btn clicked!');
 
-      accounts = await App.getAccs();
+      var accounts = await App.getAccs();
       var couponID = $('#id2').val() || 1;
       var success = await App.redeem(couponID);
       console.log(success);

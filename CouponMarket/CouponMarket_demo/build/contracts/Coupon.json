@@ -170,52 +170,10 @@
         }
       },
       "links": {},
-      "address": "0xe86d797f49ff639a478bee36a7ca62a3422ac220",
-      "updated_at": 1512754994242
-    },
-    "1512748618848": {
-      "events": {
-        "0xbc48fdaddfcfb54d36a0ac4d7e52f46cdf854784b9c0978d385a35e8383262d4": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "name": "new_owner",
-              "type": "address"
-            }
-          ],
-          "name": "ChangeOwnerTo",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0xf2b4fe870bc37267cb268a8e74fa839f091ec54a",
-      "updated_at": 1512752143439
-    },
-    "1512755036669": {
-      "events": {
-        "0xbc48fdaddfcfb54d36a0ac4d7e52f46cdf854784b9c0978d385a35e8383262d4": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "name": "new_owner",
-              "type": "address"
-            }
-          ],
-          "name": "ChangeOwnerTo",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0xb2f870e0f8ae7ae41410cc9b62e43fde65711511",
-      "updated_at": 1512755180752
+      "address": "0x2e0f00ad2614ca825161b3b83aac3638468764a7",
+      "updated_at": 1512756770138
     }
   },
   "schema_version": "0.0.5",
-<<<<<<< HEAD
-  "updated_at": 1512755180752
-=======
-  "updated_at": 1512754994242
->>>>>>> 73e240771b765b24072e3b30e77682132eaeec8f
+  "updated_at": 1512756770138
 }

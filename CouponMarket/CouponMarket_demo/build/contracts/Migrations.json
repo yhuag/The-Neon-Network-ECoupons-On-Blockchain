@@ -64,26 +64,10 @@
     "1512727893280": {
       "events": {},
       "links": {},
-      "address": "0x0cc6a80ae5060b48833f48392f9381ee1320db32",
-      "updated_at": 1512754994245
-    },
-    "1512748618848": {
-      "events": {},
-      "links": {},
-      "address": "0x3c6719e9a57e0f7ee45815ecca8061012274c9cf",
-      "updated_at": 1512752143441
-    },
-    "1512755036669": {
-      "events": {},
-      "links": {},
-      "address": "0xb1a46191e274c4043cc6637ca3698b8537f88b4f",
-      "updated_at": 1512755180754
+      "address": "0x832888613caa2ebb47b47d8bd772f86e36e93fda",
+      "updated_at": 1512756770138
     }
   },
   "schema_version": "0.0.5",
-<<<<<<< HEAD
-  "updated_at": 1512755180754
-=======
-  "updated_at": 1512754994245
->>>>>>> 73e240771b765b24072e3b30e77682132eaeec8f
+  "updated_at": 1512756770138
 }
