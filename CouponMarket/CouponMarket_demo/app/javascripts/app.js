@@ -128,15 +128,15 @@ window.addEventListener('load', async function () {
   console.log(accounts);
   for (var i = 0; i < accounts.length; i++) {
     $('#receiver:last-child').append(`
-      <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
     `);
 
     $('#owner_transfer:last-child').append(`
-      <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
     `);
 
     $('#owner_redeem:last-child').append(`
-      <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
     `);
   }
 
