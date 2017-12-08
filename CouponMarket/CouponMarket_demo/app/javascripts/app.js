@@ -87,6 +87,22 @@ window.App = {
     return owner;
   },
 
+  getStartTime: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var startTime = await coupon.startTime.call();
+    return startTime;
+  },
+
+  getEndTime: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var endTime = await coupon.endTime.call();
+    return endTime;
+  },
+
   transfer: async function (couponID, receiverAddr) { // return true if success
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
@@ -137,7 +153,7 @@ window.addEventListener('load', async function () {
 
   function appendAccountToSelect(anchor, _accounts, index) {
     $(anchor).append(`
-      <option value="`+ _accounts[index] + `">` + "Account "+ index +": " + _accounts[index] + `</option>
+      <option value="`+ _accounts[index] + `">` + "Account " + index + ": " + _accounts[index] + `</option>
     `);
   }
 
