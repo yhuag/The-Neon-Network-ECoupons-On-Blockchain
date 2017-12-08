@@ -161,3 +161,11 @@ a.btn,.btn {
 }
 
 
+/* select with CSS avatar icons */
+option.avatar {
+  background-repeat: no-repeat !important;
+  padding-left: 20px;
+}
+.avatar .ui-icon {
+  background-position: left top;
+}

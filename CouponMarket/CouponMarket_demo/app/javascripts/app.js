@@ -181,7 +181,8 @@ window.addEventListener('load', async function () {
 
   function appendAccountToSelect(anchor, _accounts, index) {
     $(anchor).append(`
-      <option value="`+ _accounts[index] + `" style="background-image:url('img/0.png')">` + "Account " + index + ": " + _accounts[index] + `</option>
+    
+      <option value="`+ _accounts[index] + `" data-class="avatar" data-style="background-image: url('/img/0.png')">` + "Account " + index + ": " + _accounts[index] + `</option>
     `);
   }
 
@@ -291,4 +292,30 @@ window.addEventListener('load', async function () {
       var success = await appendUpdatedCouponInfoByID(i);
     }
   });
+
+  // Appearance Setup
+  $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
+    _renderItem: function( ul, item ) {
+      var li = $( "<li>" ),
+        wrapper = $( "<div>", { text: item.label } );
+
+      if ( item.disabled ) {
+        li.addClass( "ui-state-disabled" );
+      }
+
+      $( "<span>", {
+        style: item.element.attr( "data-style" ),
+        "class": "ui-icon " + item.element.attr( "data-class" )
+      })
+        .appendTo( wrapper );
+
+      return li.append( wrapper ).appendTo( ul );
+    }
+  });
+
+  $( "#receiver" )
+    .iconselectmenu()
+    .iconselectmenu( "menuWidget")
+      .addClass( "ui-menu-icons avatar" );
+
 });
