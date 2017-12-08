@@ -129,7 +129,7 @@ window.addEventListener('load', async function () {
   console.log(accounts);
   for (var i = 0; i < accounts.length; i++) {
     $('#receiver:last-child').append(`
-      <option value="audi">`+ accounts[i] + `</option>
+      <option value="`+ accounts[i] +`">`+ accounts[i] + `</option>
     `);
   }
 
