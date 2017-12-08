@@ -84,6 +84,7 @@ window.App = {
   transfer: async function (couponID, receiverAddr) { // return true if success
     // Get coupon instance
     var couponAddr = IDtoAddr[couponID];
+    console.log(IDtoAddr[6]);
     var coupon = Coupon.at(couponAddr);
     var owner = await coupon.owner.call();
 
