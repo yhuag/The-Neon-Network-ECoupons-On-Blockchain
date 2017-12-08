@@ -181,7 +181,6 @@ window.addEventListener('load', async function () {
 
   function appendAccountToSelect(anchor, _accounts, index) {
     $(anchor).append(`
-    
       <option value="`+ _accounts[index] + `" data-class="avatar" data-style="background-image: url('/img/`+index+`.png'); background-size: 16px 16px">` + "Account " + index + ": " + _accounts[index] + `</option>
     `);
   }
@@ -317,7 +316,7 @@ window.addEventListener('load', async function () {
     }
   });
 
-  $( "#receiver" )
+  $( ".avatar-select" )
     .iconselectmenu()
     .iconselectmenu( "menuWidget")
       .addClass( "ui-menu-icons avatar" );
