@@ -18,6 +18,7 @@ var Coupon = contract(Coupon_artifacts);
 // For application bootstrapping, check out window.addEventListener below.
 var accounts;
 var account;
+var IDtoAddr = {};
 
 window.App = {
   start: function () {
@@ -41,7 +42,6 @@ window.App = {
 
       accounts = accs;
       account = accounts[0];
-      console.log(accounts)
     });
   },
 
@@ -73,6 +73,7 @@ window.App = {
     // Get coupon ID, Address, and owner
     coupon_info.ID = couponReceipt.logs[0].args.id.toNumber();
     coupon_info.address = couponReceipt.logs[0].args.new_address;
+    IDtoAddr[coupon_info.ID] = coupon_info.address;
 
     // Get coupon instance
     var coupon = Coupon.at(coupon_info.address);
@@ -80,8 +81,9 @@ window.App = {
     return coupon_info;
   },
 
-  transfer: async function (couponAddr, receiverAddr) { // return true if success
+  transfer: async function (couponID, receiverAddr) { // return true if success
     // Get coupon instance
+    var couponAddr = IDtoAddr[couponID];
     var coupon = Coupon.at(couponAddr);
     var owner = await coupon.owner.call();
 
@@ -93,7 +95,8 @@ window.App = {
     return receiver == receiverAddr;
   },
 
-  redeem: async function (couponAddr) { // return true if success
+  redeem: async function (couponID) { // return true if success
+    var couponAddr = IDtoAddr[couponID];
     var coupon = Coupon.at(couponAddr);
     // "Redeem" the coupon 
     var receipt = await coupon.redeem({ from: couponAddr });
