@@ -204,6 +204,18 @@ window.addEventListener('load', async function () {
     return false;
   });
 
+  async function appendUpdatedCouponInfoByID(_couponID) {
+    var coupon_info = {};
+
+    coupon_info.ID = _couponID;
+    coupon_info.owner = await App.getOwnerAddr(_couponID);      
+    coupon_info.issuer = await App.getIssuerAddr(_couponID);
+    coupon_info.value = await App.getCouponValue(_couponID);
+    coupon_info.startTime = await App.getStartTime(_couponID);
+    coupon_info.endTime = await App.getEndTime(_couponID);
+    appendCouponInfo(coupon_info);
+  }
+
   $('#transfer').click(async function () {
     console.log('transfer btn clicked!');
 
@@ -217,22 +229,24 @@ window.addEventListener('load', async function () {
       return;
     };
 
-    // console.log(receiver);
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-    var coupon_info = {};
-    coupon_info.ID = couponID;
-
     if(success) {
-      coupon_info.owner = await App.getOwnerAddr(couponID);      
-      coupon_info.issuer = await App.getIssuerAddr(couponID);
-      coupon_info.value = await App.getCouponValue(couponID);
-      coupon_info.startTime = await App.getStartTime(couponID);
-      coupon_info.endTime = await App.getEndTime(couponID);
-      
-      appendCouponInfo(coupon_info);
+      appendUpdatedCouponInfoByID(couponID);
     }
+
+    // var coupon_info = {};
+    // coupon_info.ID = couponID;
+
+    // if(success) {
+    //   coupon_info.owner = await App.getOwnerAddr(couponID);      
+    //   coupon_info.issuer = await App.getIssuerAddr(couponID);
+    //   coupon_info.value = await App.getCouponValue(couponID);
+    //   coupon_info.startTime = await App.getStartTime(couponID);
+    //   coupon_info.endTime = await App.getEndTime(couponID);
+    //   appendCouponInfo(coupon_info);
+    // }
 
   });
 
