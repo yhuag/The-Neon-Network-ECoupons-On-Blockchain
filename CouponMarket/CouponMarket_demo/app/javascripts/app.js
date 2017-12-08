@@ -92,8 +92,16 @@ window.App = {
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
     var coupon = Coupon.at(couponAddr);
-    var owner = await coupon.owner.call();
-    return owner;
+    var issuer = await coupon.issuer.call();
+    return issuer;
+  },
+
+  getCouponValue: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var value = await coupon.value.call();
+    return value;
   },
 
   transfer: async function (couponID, receiverAddr) { // return true if success
