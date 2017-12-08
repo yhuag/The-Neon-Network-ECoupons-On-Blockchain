@@ -120,51 +120,6 @@
 
   </div>
 
-  <script>
-
-
-    $(function () {
-
-    });
-
-    $('#create_coupon').click(async function () {
-      console.log('create coupon btn clicked!');
-      var value = $('#value').val() || 100;
-      var startTime = $('#startTime').val() || 0;
-      var endTime = $('#endTime').val() || 10;
-      var coupon_info = await App.newCoupon(value, startTime, endTime);
-      $('#coupon_info > tbody:last-child').append(`
-        <tr>
-          <td>`+ coupon_info.ID + `</td>
-          <td>`+ coupon_info.owner + `</td>
-          <td>`+ coupon_info.issuer + `</td>
-          <td>`+ coupon_info.value + `</td>
-          <td>`+ coupon_info.startTime + `</td>
-          <td>`+ coupon_info.endTime + `</td>
-        </tr>
-        `);
-      console.log(coupon_info);
-      return false;
-    });
-    $('#transfer').click(async function () {
-      console.log('transfer btn clicked!');
-
-      var accounts = await App.getAccs();
-      var couponID = $('#id').val() || 1;
-      var receiver = $('#receiver').val() || accounts[1];
-      var success = await App.transfer(couponID, receiver);
-      console.log(success);
-    });
-    $('#redeem').click(async function () {
-      console.log('transfer btn clicked!');
-
-      var accounts = await App.getAccs();
-      var couponID = $('#id2').val() || 1;
-      var success = await App.redeem(couponID);
-      console.log(success);
-    });
-
-  </script>
 </body>
 
 </html>
