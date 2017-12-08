@@ -54,22 +54,60 @@ contract('Coupon', function(accounts) {
 });
 
 contract('Integration', function(accounts) {
-  it("Coupon Distribution Test", async function() {
+  it("Coupon Transfer Test", async function() {
+    // Create market
     let market = await Market.new();
   
+    // Create coupon
     var couponReceipt = await market.createCoupon(0, 10, 10);
 
+    // Get coupon ID and Address
     var couponID = couponReceipt.logs[0].args.id.toNumber();
     var couponAddr = couponReceipt.logs[0].args.new_address;
-    //console.log(couponID, couponAddr);
 
     // Get coupon instance
     var coupon = Coupon.at(couponAddr);
 
+    // Get current owner
     var owner = await coupon.owner.call();
+
+    // "Transfer" the coupon ownership from the issuer
     var receipt = await coupon.transfer(accounts[1], {from: owner});
 
+    // Get receiver and validate
     var receiver = await coupon.owner.call();
     assert.equal(receiver, accounts[1], "owner incorrect");
+  });
+
+  it("Coupon Redeem Test", async function() {
+    // Create market
+    let market = await Market.new();
+
+    // Create coupon
+    var couponReceipt = await market.createCoupon(0, 10, 10);
+
+    // Get coupon ID and Address
+    var couponID = couponReceipt.logs[0].args.id.toNumber();
+    var couponAddr = couponReceipt.logs[0].args.new_address;
+
+    // Get coupon instance
+    var coupon = Coupon.at(couponAddr);
+
+    // Get issuer
+    var issuer = await coupon.issuer.call();
+
+    // "Transfer" the coupon ownership
+    var receipt = await coupon.transfer(accounts[1], {from: issuer});
+
+    // Get issuer and validate
+    var receiver = await coupon.owner.call();
+    assert.equal(receiver, accounts[1], "owner incorrect");
+
+    // "Redeem" the coupon 
+    var receipt = await coupon.redeem({from: receiver});
+
+    // Get current owner and validate
+    var owner = await coupon.owner.call();
+    assert.equal(owner, issuer, "owner should be the issuer after redeem action");
   });
 });
