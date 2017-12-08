@@ -192,3 +192,7 @@ label {
 #endTime {
     margin-top: -16px;
 }
+.ui-selectmenu-button.ui-button{
+    width: 100% !important;
+    
+}
