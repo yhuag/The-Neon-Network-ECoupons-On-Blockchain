@@ -72,6 +72,8 @@ window.App = {
 
 
 
+
+
   // refreshBalance: function() {
   //   var self = this;
 
