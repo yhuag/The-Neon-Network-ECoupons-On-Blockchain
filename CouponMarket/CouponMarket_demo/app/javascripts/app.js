@@ -22,10 +22,11 @@ var account;
 window.App = {
   start: function () {
     var self = this;
+    var LOCALHOST_URL = 'http://localhost:8545';
 
     // Bootstrap the Market abstraction for Use.
-    Market.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
-    Coupon.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+    Market.setProvider(new web3.providers.HttpProvider(LOCALHOST_URL));
+    Coupon.setProvider(new web3.providers.HttpProvider(LOCALHOST_URL));
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
