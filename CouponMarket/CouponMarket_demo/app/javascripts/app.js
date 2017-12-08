@@ -204,6 +204,19 @@ window.addEventListener('load', async function () {
     return false;
   });
 
+  async function appendUpdatedCouponInfoByID(_couponID) {
+    var coupon_info = {};
+
+    coupon_info.ID = _couponID;
+    coupon_info.owner = await App.getOwnerAddr(_couponID);      
+    coupon_info.issuer = await App.getIssuerAddr(_couponID);
+    coupon_info.value = await App.getCouponValue(_couponID);
+    coupon_info.startTime = await App.getStartTime(_couponID);
+    coupon_info.endTime = await App.getEndTime(_couponID);
+    
+    appendCouponInfo(coupon_info);
+  }
+
   $('#transfer').click(async function () {
     console.log('transfer btn clicked!');
 
@@ -217,11 +230,12 @@ window.addEventListener('load', async function () {
       return;
     };
 
-    // console.log(receiver);
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-
+    if(success) {
+      appendUpdatedCouponInfoByID(couponID);
+    }
   });
 
   $('#redeem').click(async function () {
@@ -238,5 +252,9 @@ window.addEventListener('load', async function () {
 
     var success = await App.redeem(couponID);
     console.log(success);
+
+    if(success) {
+      appendUpdatedCouponInfoByID(couponID);
+    }
   });
 });
