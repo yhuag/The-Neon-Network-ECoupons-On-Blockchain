@@ -223,9 +223,9 @@ window.addEventListener('load', async function () {
 
     var coupon_info = {};
     coupon_info.ID = couponID;
-    coupon_info.owner = owner;
 
     if(success) {
+      coupon_info.owner = await App.getOwnerAddr(couponID);      
       coupon_info.issuer = await App.getIssuerAddr(couponID);
       coupon_info.value = await App.getCouponValue(couponID);
       coupon_info.startTime = await App.getStartTime(couponID);
