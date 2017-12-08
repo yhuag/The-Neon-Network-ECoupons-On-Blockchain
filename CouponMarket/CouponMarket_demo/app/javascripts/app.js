@@ -172,6 +172,9 @@ window.addEventListener('load', async function () {
   }
 
   App.start();
+  var volume = await App.getVolume();
+  $('#current_volume').html(volume.toNumber());
+
 
   var accounts = await App.getAccs();
   console.log(accounts);
@@ -222,6 +225,8 @@ window.addEventListener('load', async function () {
     var coupon_info = await App.newCoupon(value, startTime, endTime);
     appendCouponInfo(coupon_info);
     console.log(coupon_info);
+    var volume = await App.getVolume();
+    $('#current_volume').html(volume.toNumber());
     return false;
   });
 
@@ -283,8 +288,7 @@ window.addEventListener('load', async function () {
     var volume = await App.getVolume();
     $('#coupon_info > tbody tr').remove();
     for (var i = 1; i <= volume; i++) {
-      appendUpdatedCouponInfoByID(i);
+      var success = await appendUpdatedCouponInfoByID(i);
     }
   });
-
 });
