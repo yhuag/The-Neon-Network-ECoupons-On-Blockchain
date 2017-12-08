@@ -191,8 +191,27 @@
       "links": {},
       "address": "0xb4bd98afbff9140be2c53c96dcbabbabcc47f669",
       "updated_at": 1512763286932
+    },
+    "1512765989463": {
+      "events": {
+        "0xbc48fdaddfcfb54d36a0ac4d7e52f46cdf854784b9c0978d385a35e8383262d4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "new_owner",
+              "type": "address"
+            }
+          ],
+          "name": "ChangeOwnerTo",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe40a2575adcb6d1b10ce2004b9edae03122ab9ab",
+      "updated_at": 1512766370557
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1512763286932
+  "updated_at": 1512766370557
 }

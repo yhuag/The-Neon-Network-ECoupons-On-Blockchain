@@ -149,6 +149,12 @@ window.App = {
     var issuer = await coupon.issuer.call();
     return owner == issuer;
   },
+
+  getVolume: async function () {
+    let market = await Market.deployed();
+    var volume = await market.volume.call();
+    return volume;
+  },
 };
 
 
@@ -272,4 +278,13 @@ window.addEventListener('load', async function () {
       appendUpdatedCouponInfoByID(couponID);
     }
   });
+
+  $('#load').click(async function () {
+    var volume = await App.getVolume();
+    // $('#coupon_info tr').remove();
+    for (var i = 1; i <= volume; i++) {
+
+    }
+  });
+
 });
