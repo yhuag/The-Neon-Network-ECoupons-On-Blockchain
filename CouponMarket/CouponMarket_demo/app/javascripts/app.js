@@ -264,5 +264,9 @@ window.addEventListener('load', async function () {
 
     var success = await App.redeem(couponID);
     console.log(success);
+
+    if(success) {
+      appendUpdatedCouponInfoByID(couponID);
+    }
   });
 });
