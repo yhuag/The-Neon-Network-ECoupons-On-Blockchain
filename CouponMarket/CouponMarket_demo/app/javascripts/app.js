@@ -205,10 +205,17 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-    // var coupon_info;
-    // coupon_info.issuer = 
+    var coupon_info = {};
+    coupon_info.ID = couponID;
+    coupon_info.owner = owner;
+
     if(success) {
-      appendCouponInfo();
+      coupon_info.issuer = await App.getIssuerAddr(couponID);
+      coupon_info.value = await App.getCouponValue(couponID);
+      coupon_info.startTime = await App.getStartTime(couponID);
+      coupon_info.endTime = await App.getEndTime(couponID);
+      
+      appendCouponInfo(coupon_info);
     }
 
   });
