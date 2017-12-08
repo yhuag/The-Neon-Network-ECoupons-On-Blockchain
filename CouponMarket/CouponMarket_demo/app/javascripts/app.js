@@ -221,7 +221,6 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-<<<<<<< HEAD
     var coupon_info = {};
     coupon_info.ID = couponID;
     coupon_info.owner = owner;
@@ -234,8 +233,6 @@ window.addEventListener('load', async function () {
       
       appendCouponInfo(coupon_info);
     }
-=======
->>>>>>> 69e9397bfe8719be40bb2121bbe039cd11414364
 
   });
 
