@@ -134,18 +134,16 @@ window.addEventListener('load', async function () {
   var accounts = await App.getAccs();
   console.log(accounts);
 
+  function appendAccountToSelect(anchor, _accounts, index) {
+    $(anchor).append(`
+      <option value="`+ _accounts[index] + `">` + "Account "+ index +": " + _accounts[index] + `</option>
+    `);
+  }
+
   for (var i = 0; i < accounts.length; i++) {
-    $('#receiver:last-child').append(`
-      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
-    `);
-
-    $('#owner_transfer:last-child').append(`
-      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
-    `);
-
-    $('#owner_redeem:last-child').append(`
-      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
-    `);
+    appendAccountToSelect('#receiver:last-child', accounts, i);
+    appendAccountToSelect('#owner_transfer:last-child', accounts, i);
+    appendAccountToSelect('#owner_redeem:last-child', accounts, i);
   }
 
   function appendCouponInfo(coupon_info) {
