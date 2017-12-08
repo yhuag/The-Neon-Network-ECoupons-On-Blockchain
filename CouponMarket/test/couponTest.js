@@ -27,7 +27,7 @@ contract('Market', function(accounts) {
 contract('Coupon', function(accounts) {
 
   it("Coupon Instantiation Test", async function() {
-    let coupon = await Coupon.new(0, 0, 10, 10);
+    let coupon = await Coupon.new(0, 0, 10, 10, accounts[0]);
     var ID = await coupon.ID.call();
     var startTime = await coupon.startTime.call();
     var value = await coupon.value.call();
@@ -37,7 +37,7 @@ contract('Coupon', function(accounts) {
   });
 
   it("redeem", async function(){
-    let coupon = await Coupon.new(0, 0, 10, 10);
+    let coupon = await Coupon.new(0, 0, 10, 10, accounts[0]);
     coupon.redeem();
     var owner = await coupon.owner.call();
     var issuer = await coupon.issuer.call();
@@ -45,7 +45,7 @@ contract('Coupon', function(accounts) {
   });
 
   it("transfer", async function(){
-    let coupon = await Coupon.new(0, 0, 10, 10);
+    let coupon = await Coupon.new(0, 0, 10, 10, accounts[0]);
     coupon.transfer(accounts[1]);
     var owner = await coupon.owner.call();
     assert.equal(owner, accounts[1], "owner incorrect");
