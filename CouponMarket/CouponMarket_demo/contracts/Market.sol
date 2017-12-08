@@ -34,5 +34,4 @@ contract Market {
     function getCouponAddrByID(uint256 couponID) public returns (address) {
         return coupons[couponID];
     }
-
 }

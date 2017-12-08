@@ -79,8 +79,15 @@ window.App = {
     return coupon_info;
   },
 
-  transfer: async function (couponID, receiverAddr) { // return true if success
+  getOwner: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var owner = await coupon.owner.call();
+    return owner;
+  },
 
+  transfer: async function (couponID, receiverAddr) { // return true if success
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
 
@@ -170,7 +177,16 @@ window.addEventListener('load', async function () {
 
     var couponID = $('#id').val() || 1;
     var receiver = $('#receiver').val() || accounts[1];
-    console.log(receiver);
+
+    // Check if the coupon owner is correct 
+    var owner = await App.getOwner(couponID);
+    console.log(owner);
+    if ($('#owner').val() != owner) {
+      alert("coupon owner incorrect!");
+      return;
+    };
+
+    // console.log(receiver);
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
@@ -184,6 +200,14 @@ window.addEventListener('load', async function () {
     console.log('redeem btn clicked!');
 
     var couponID = $('#id2').val() || 1;
+
+    // Check if the coupon owner is correct 
+    var owner = await App.getOwner(couponID);
+    if ($('#owner_redeem').val() != owner) {
+      alert("coupon owner incorrect!");
+      return;
+    }
+
     var success = await App.redeem(couponID);
     console.log(success);
   });
