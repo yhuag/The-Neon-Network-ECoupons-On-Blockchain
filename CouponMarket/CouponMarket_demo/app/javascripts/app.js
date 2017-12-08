@@ -281,7 +281,7 @@ window.addEventListener('load', async function () {
 
   $('#load').click(async function () {
     var volume = await App.getVolume();
-    // $('#coupon_info tr').remove();
+    $('#coupon_info > tbody tr').remove();
     for (var i = 1; i <= volume; i++) {
 
     }
