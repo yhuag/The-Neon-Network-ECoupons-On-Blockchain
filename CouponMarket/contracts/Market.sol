@@ -29,12 +29,9 @@ contract Market {
     }
 
 
-    // Track coupon
-    // function 
-
-    // Tracker
-    // function getIssuer(uint256 couponID) public returns (address) {
-    //     coupons[couponID]
-    // }
+    // Return coupon address
+    function getCouponAddrByID(uint256 couponID) public returns (address) {
+        return coupons[couponID];
+    }
 
 }

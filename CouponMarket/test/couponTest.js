@@ -53,6 +53,21 @@ contract('Coupon', function(accounts) {
   
 });
 
-contract('UseCase', function(accounts) {
+contract('Integration', function(accounts) {
+  it("Coupon Distribution Test", async function() {
+    let market = await Market.new();
 
+    let couponIDObj = await market.createCoupon.call(0, 10, 10);
+    console.log(couponIDObj);    
+    couponID = couponIDObj.toNumber();
+    console.log(couponID);
+    let couponAddress = await market.getCouponAddrByID.call(couponID);
+    console.log(couponAddress);
+
+    couponIDObj = await market.createCoupon.call(0, 10, 10);
+    couponID = couponIDObj.toNumber();
+    console.log(couponID);
+    couponAddress = await market.getCouponAddrByID.call(couponID);
+    console.log(couponAddress);
+  });
 });
