@@ -168,16 +168,6 @@ window.addEventListener('load', async function () {
     var endTime = $('#endTime').val() || 10;
     var coupon_info = await App.newCoupon(value, startTime, endTime);
     appendCouponInfo(coupon_info);
-    // $('#coupon_info > tbody:last-child').append(`
-    //   <tr>
-    //     <td>`+ coupon_info.ID + `</td>
-    //     <td>`+ coupon_info.owner + `</td>
-    //     <td>`+ coupon_info.issuer + `</td>
-    //     <td>`+ coupon_info.value + `</td>
-    //     <td>`+ coupon_info.startTime + `</td>
-    //     <td>`+ coupon_info.endTime + `</td>
-    //   </tr>
-    //   `);
     console.log(coupon_info);
     return false;
   });
@@ -198,6 +188,11 @@ window.addEventListener('load', async function () {
     // console.log(receiver);
     var success = await App.transfer(couponID, receiver);
     console.log(success);
+
+    // if(success) {
+    //   appendCouponInfo();
+    // }
+
   });
 
   $('#redeem').click(async function () {
