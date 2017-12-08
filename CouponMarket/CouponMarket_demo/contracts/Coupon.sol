@@ -50,7 +50,7 @@ contract Coupon {
   }
 
   // redeem the coupon
-  function redeem() public onlyOwner {
+  function redeem() public onlyOwner isValidRedeemTime {
     changeOwnerTo(issuer);
   }
 

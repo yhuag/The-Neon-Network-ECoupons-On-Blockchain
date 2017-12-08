@@ -17,6 +17,11 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
+  <!-- ... -->
+  <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+  />
 </head>
 
 <style>
@@ -48,11 +53,21 @@
         </div>
         <div class="form-group col-md-3">
           <label for="startTime" class="control-label">Start time</label>
-          <input type="text" value='' class="form-control" id="startTime" placeholder="0">
+          <div class='input-group date' id='startTime'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
         </div>
         <div class="form-group col-md-3">
           <label for="endTime" class="control-label">End time</label>
-          <input type="text" value='' class="form-control" id="endTime" placeholder="10">
+          <div class='input-group date' id='endTime'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
         </div>
         <div class="form-group col-md-3 parent-vertical-centralized">
           <label for="create_coupon" class="control-label" style="color:white">none</label>

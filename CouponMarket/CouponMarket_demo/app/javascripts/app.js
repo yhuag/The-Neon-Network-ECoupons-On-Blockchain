@@ -220,9 +220,18 @@ window.addEventListener('load', async function () {
   $('#create_coupon').click(async function () {
     console.log('create coupon btn clicked!');
     var value = $('#value').val() || 100;
-    var startTime = $('#startTime').val() || 0;
-    var endTime = $('#endTime').val() || 10;
+    var startTime = Date.now();
+    var endTime = startTime + 60 * 60; // add one hour
+    if ($('#startTime').data("DateTimePicker").date() != null) startTime = $('#startTime').data("DateTimePicker").date().unix();
+    if ($('#endTime').data("DateTimePicker").date() != null) endTime = $('#endTime').data("DateTimePicker").date().unix();
+    console.log(startTime, endTime);
+    if (startTime > endTime) {
+      alert("end time must after start time!");
+      return;
+    }
+
     var coupon_info = await App.newCoupon(value, startTime, endTime);
+
     appendCouponInfo(coupon_info);
     console.log(coupon_info);
     var volume = await App.getVolume();
@@ -295,4 +304,17 @@ window.addEventListener('load', async function () {
   $('#refresh').click(async function () {
     var success = await refresh_table();
   });
+
+  $('#datetimepicker1').on("dp.change", function (e) {
+    console.log(e.date);
+  });
+
+  $('#test').datetimepicker({
+    showTodayButton: true
+  });
+  $(function () {
+    $('#startTime').datetimepicker();
+    $('#endTime').datetimepicker();
+  });
 });
+
