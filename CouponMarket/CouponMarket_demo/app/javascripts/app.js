@@ -321,4 +321,6 @@ window.addEventListener('load', async function () {
     .iconselectmenu( "menuWidget")
       .addClass( "ui-menu-icons avatar" );
 
+  $( ".selector" ).selectmenu( "option", "width", 2000 );
+
 });
