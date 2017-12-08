@@ -88,6 +88,22 @@ window.App = {
     return owner;
   },
 
+  getStartTime: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var startTime = await coupon.startTime.call();
+    return startTime;
+  },
+
+  getEndTime: async function (couponID) {
+    let market = await Market.deployed();
+    var couponAddr = await market.getCouponAddrByID.call(couponID);
+    var coupon = Coupon.at(couponAddr);
+    var endTime = await coupon.endTime.call();
+    return endTime;
+  },
+
   getIssuerAddr: async function (couponID) {
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
@@ -154,7 +170,7 @@ window.addEventListener('load', async function () {
 
   function appendAccountToSelect(anchor, _accounts, index) {
     $(anchor).append(`
-      <option value="`+ _accounts[index] + `">` + "Account "+ index +": " + _accounts[index] + `</option>
+      <option value="`+ _accounts[index] + `">` + "Account " + index + ": " + _accounts[index] + `</option>
     `);
   }
 
@@ -205,6 +221,7 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
+<<<<<<< HEAD
     var coupon_info = {};
     coupon_info.ID = couponID;
     coupon_info.owner = owner;
@@ -217,6 +234,8 @@ window.addEventListener('load', async function () {
       
       appendCouponInfo(coupon_info);
     }
+=======
+>>>>>>> 69e9397bfe8719be40bb2121bbe039cd11414364
 
   });
 
