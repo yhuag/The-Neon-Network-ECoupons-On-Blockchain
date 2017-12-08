@@ -23,21 +23,21 @@
 <div class="container">
 
   <body>
-    <form>
+    <form id="create_coupon_form">
       <div class="form-group col-xs-2 col-md-2">
         <label for="name" class="control-label">Value</label>
-        <input type="email" value='' class="form-control" id="name" placeholder="100">
+        <input type="text" value='' class="form-control" id="name" placeholder="100">
       </div>
       <div class="form-group col-xs-2 col-md-2">
         <label for="name" class="control-label">Start time</label>
-        <input type="email" value='' class="form-control" id="name" placeholder="0">
+        <input type="text" value='' class="form-control" id="name" placeholder="0">
       </div>
       <div class="form-group col-xs-2 col-md-2">
         <label for="name" class="control-label">End time</label>
-        <input type="email" value='' class="form-control" id="name" placeholder="10">
+        <input type="text" value='' class="form-control" id="name" placeholder="10">
       </div>
       <div class="form-group col-xs-2 col-md-2">
-        <button type="submit " id="create_coupon " class="btn btn-default">Create coupon</button>
+        <button type="submit " class="btn btn-default">Create coupon</button>
       </div>
     </form>
 
@@ -67,7 +67,7 @@
     <span id=" status "></span>
 
     <script>
-      $('#create_coupon').click(async function () {
+      $('#create_coupon_form').submit(async function () {
         console.log('clicked!');
         var coupon_info = await App.newCoupon();
         $('#coupon_info > tbody:last-child').append(`
@@ -82,6 +82,7 @@
         `);
 
         console.log(coupon_info);
+        return false;
       });
 
     </script>
