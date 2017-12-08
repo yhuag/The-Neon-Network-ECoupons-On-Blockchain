@@ -49,8 +49,9 @@ window.App = {
     status.innerHTML = message;
   },
 
-  getAccs: function () {
-    return accounts;
+  getAccs: async function () {
+    var accs = await web3.eth.getAccounts();
+    return accs;
   },
 
   newCoupon: async function (value = 10, startTime = 0, endTime = 10) {
@@ -83,7 +84,6 @@ window.App = {
 
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
-    console.log(couponAddr);
 
     // Get coupon instance
     var coupon = Coupon.at(couponAddr);
@@ -109,45 +109,6 @@ window.App = {
     var issuer = await coupon.issuer.call();
     return owner == issuer;
   },
-
-
-
-  // refreshBalance: function() {
-  //   var self = this;
-
-  //   var meta;
-  //   Market.deployed().then(function(instance) {
-  //     meta = instance;
-  //     return meta.getBalance.call(account, {from: account});
-  //   }).then(function(value) {
-  //     var balance_element = document.getElementById("balance");
-  //     balance_element.innerHTML = value.valueOf();
-  //   }).catch(function(e) {
-  //     console.log(e);
-  //     self.setStatus("Error getting balance; see log.");
-  //   });
-  // },
-
-  // sendCoin: function() {
-  //   var self = this;
-
-  //   var amount = parseInt(document.getElementById("amount").value);
-  //   var receiver = document.getElementById("receiver").value;
-
-  //   this.setStatus("Initiating transaction... (please wait)");
-
-  //   var meta;
-  //   Market.deployed().then(function(instance) {
-  //     meta = instance;
-  //     return meta.sendCoin(receiver, amount, {from: account});
-  //   }).then(function() {
-  //     self.setStatus("Transaction complete!");
-  //     self.refreshBalance();
-  //   }).catch(function(e) {
-  //     console.log(e);
-  //     self.setStatus("Error sending coin; see log.");
-  //   });
-  // }
 };
 
 window.addEventListener('load', function () {
