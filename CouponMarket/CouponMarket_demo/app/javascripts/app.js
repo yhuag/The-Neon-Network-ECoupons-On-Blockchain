@@ -88,7 +88,6 @@ window.App = {
     return owner;
   },
 
-<<<<<<< HEAD
   getStartTime: async function (couponID) {
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
@@ -103,7 +102,8 @@ window.App = {
     var coupon = Coupon.at(couponAddr);
     var endTime = await coupon.endTime.call();
     return endTime;
-=======
+  },
+
   getIssuerAddr: async function (couponID) {
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
@@ -118,7 +118,6 @@ window.App = {
     var coupon = Coupon.at(couponAddr);
     var value = await coupon.value.call();
     return value;
->>>>>>> 4a9d056d13b8104d00f2e08177e812d8baa8680c
   },
 
   transfer: async function (couponID, receiverAddr) { // return true if success
@@ -222,17 +221,6 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-<<<<<<< HEAD
-    var coupon_info;
-    coupon_info.issuer = App.getIssuer
-    if (success) {
-=======
-    // var coupon_info;
-    // coupon_info.issuer = 
-    if(success) {
->>>>>>> 4a9d056d13b8104d00f2e08177e812d8baa8680c
-      appendCouponInfo();
-    }
 
   });
 
