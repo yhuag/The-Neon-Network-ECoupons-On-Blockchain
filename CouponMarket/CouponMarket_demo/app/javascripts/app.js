@@ -173,6 +173,11 @@ window.addEventListener('load', async function () {
     console.log(receiver);
     var success = await App.transfer(couponID, receiver);
     console.log(success);
+
+    // if(success) {
+    //   appendCouponInfo();
+    // }
+
   });
 
   $('#redeem').click(async function () {
