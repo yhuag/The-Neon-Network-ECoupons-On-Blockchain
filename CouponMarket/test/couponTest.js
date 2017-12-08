@@ -56,16 +56,24 @@ contract('Coupon', function(accounts) {
 contract('Integration', function(accounts) {
   it("Coupon Distribution Test", async function() {
     let market = await Market.new();
+  
+    var couponReceipt = await market.createCoupon(0, 10, 10);
 
-    // let couponIDObj = await market.createCoupon(0, 10, 10);
-    // console.log(couponIDObj.receipt.logs);    
-    var couponIDObj = await market.createCoupon(0, 10, 10);
-    //console.log(couponIDObj.toNumber());    
-    couponIDObj = await market.createCoupon(0, 10, 10);
-    couponIDObj = await market.createCoupon(0, 10, 10);
-    var newCouponID = couponIDObj.logs[0].args.id.toNumber();
-    var newCouponAddr = couponIDObj.logs[0].args.new_address;
-    console.log(newCouponID, newCouponAddr);
+    var couponID = couponReceipt.logs[0].args.id.toNumber();
+    var couponAddr = couponReceipt.logs[0].args.new_address;
+    console.log(couponID, couponAddr);
+
+    // Get coupon instance
+    var coupon = Coupon.at(couponAddr);
+
+    var owner = await coupon.owner.call();
+    console.log(owner);
+
+    coupon.transfer(accounts[1]);
+    owner = await coupon.owner.call();
+    console.log(owner);
+
+
     // couponID = couponIDObj.toNumber();
     // console.log(couponID);
     // let couponAddress = await market.getCouponAddrByID.call(couponID);
