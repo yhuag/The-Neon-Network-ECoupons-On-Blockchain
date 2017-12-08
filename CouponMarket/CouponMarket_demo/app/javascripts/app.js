@@ -54,6 +54,11 @@ window.App = {
     let market = await Market.deployed();
 
     var coupon_info = {};
+    coupon_info.startTime = startTime;
+    coupon_info.endTime = endTime;
+    coupon_info.value = value;
+    coupon_info.owner = accounts[0];
+
     // // Set coupon default issuer
     coupon_info.issuer = accounts[0];
 
@@ -70,18 +75,22 @@ window.App = {
     return coupon_info;
   },
 
-  transfer: async function (couponAddr, receiverAddr) {
+  transfer: async function (senderAddr, receiverAddr) {
     // Get coupon instance
-    var coupon = Coupon.at(couponAddr);
+    var coupon = Coupon.at(senderAddr);
     var owner = await coupon.owner.call();
 
     // "Transfer" the coupon ownership from the issuer
     var receipt = await coupon.transfer(receiverAddr, { from: owner });
 
     // Get receiver and validate
-    var receiver = await coupon.owner.call();
+    var receiver = await coupon.owner.call(); // should be receiverAddr
+    return receiver == receiverAddr;
   },
 
+  redeem: async function () {
+
+  },
 
 
 

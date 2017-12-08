@@ -19,19 +19,73 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body>
 
-  <button id="send">Send MetaCoin</button>
+<div class="container">
 
-  <span id=" status "></span>
+  <body>
+    <form>
+      <div class="form-group col-xs-2 col-md-2">
+        <label for="name" class="control-label">Value</label>
+        <input type="email" value='' class="form-control" id="name" placeholder="100">
+      </div>
+      <div class="form-group col-xs-2 col-md-2">
+        <label for="name" class="control-label">Start time</label>
+        <input type="email" value='' class="form-control" id="name" placeholder="0">
+      </div>
+      <div class="form-group col-xs-2 col-md-2">
+        <label for="name" class="control-label">End time</label>
+        <input type="email" value='' class="form-control" id="name" placeholder="10">
+      </div>
+      <div class="form-group col-xs-2 col-md-2">
+        <button type="submit " id="create_coupon " class="btn btn-default">Create coupon</button>
+      </div>
+    </form>
 
-  <script>
-    $('#send').click(async function () {
-      console.log('clicked!');
-      var coupon_info = await App.newCoupon();
-      console.log(coupon_info);
-    });
-  </script>
-</body>
+    <br>
+
+    <div id="coupons ">
+
+      <table class="table table-striped table-hover " id="coupon_info ">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>owner</th>
+            <th>issuer</th>
+            <th>value</th>
+            <th>startTime</th>
+            <th>endTime</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <span id=" status "></span>
+
+    <script>
+      $('#create_coupon').click(async function () {
+        console.log('clicked!');
+        var coupon_info = await App.newCoupon();
+        $('#coupon_info > tbody:last-child').append(`
+        <tr>
+          <td>`+ coupon_info.ID + `</td>
+          <td>`+ coupon_info.owner + `</td>
+          <td>`+ coupon_info.issuer + `</td>
+          <td>`+ coupon_info.value + `</td>
+          <td>`+ coupon_info.startTime + `</td>
+          <td>`+ coupon_info.endTime + `</td>
+        </tr>
+        `);
+
+        console.log(coupon_info);
+      });
+
+    </script>
+  </body>
+</div>
 
 </html>
