@@ -285,12 +285,16 @@ window.addEventListener('load', async function () {
     }
   });
 
-  $('#refresh').click(async function () {
+  async function refresh_table() {
     var volume = await App.getVolume();
     $('#coupon_info > tbody tr').remove();
     for (var i = 1; i <= volume; i++) {
       var success = await appendUpdatedCouponInfoByID(i);
     }
+  }
+
+  $('#refresh').click(async function () {
+    var success = await refresh_table();
   });
 
   // Appearance Setup
