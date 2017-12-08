@@ -79,7 +79,7 @@ window.App = {
     return coupon_info;
   },
 
-  getOwner: async function (couponID) {
+  getOwnerAddr: async function (couponID) {
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
     var coupon = Coupon.at(couponAddr);
@@ -136,15 +136,15 @@ window.addEventListener('load', async function () {
 
   for (var i = 0; i < accounts.length; i++) {
     $('#receiver:last-child').append(`
-      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + "Account " + i + ": " + accounts[i] + `</option>
     `);
 
     $('#owner_transfer:last-child').append(`
-      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + "Account " + i + ": " + accounts[i] + `</option>
     `);
 
     $('#owner_redeem:last-child').append(`
-      <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + "Account " + i + ": " + accounts[i] + `</option>
     `);
   }
 
@@ -189,9 +189,8 @@ window.addEventListener('load', async function () {
     var receiver = $('#receiver').val() || accounts[1];
 
     // Check if the coupon owner is correct 
-    var owner = await App.getOwner(couponID);
-    console.log(owner);
-    if ($('#owner').val() != owner) {
+    var owner = await App.getOwnerAddr(couponID);
+    if ($('#owner_transfer').val() != owner) {
       alert("coupon owner incorrect!");
       return;
     };
@@ -207,7 +206,7 @@ window.addEventListener('load', async function () {
     var couponID = $('#id2').val() || 1;
 
     // Check if the coupon owner is correct 
-    var owner = await App.getOwner(couponID);
+    var owner = await App.getOwnerAddr(couponID);
     if ($('#owner_redeem').val() != owner) {
       alert("coupon owner incorrect!");
       return;
