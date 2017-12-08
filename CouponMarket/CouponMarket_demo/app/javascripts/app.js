@@ -126,7 +126,7 @@ window.addEventListener('load', async function () {
 
   var accounts = await App.getAccs();
   console.log(accounts);
-  
+
   for (var i = 0; i < accounts.length; i++) {
     $('#receiver:last-child').append(`
       <option value="`+ accounts[i] + `">` + "Account "+ i +": " + accounts[i] + `</option>
@@ -141,12 +141,7 @@ window.addEventListener('load', async function () {
     `);
   }
 
-  $('#create_coupon').click(async function () {
-    console.log('create coupon btn clicked!');
-    var value = $('#value').val() || 100;
-    var startTime = $('#startTime').val() || 0;
-    var endTime = $('#endTime').val() || 10;
-    var coupon_info = await App.newCoupon(value, startTime, endTime);
+  function appendCouponInfo(coupon_info) {
     $('#coupon_info > tbody:last-child').append(`
       <tr>
         <td>`+ coupon_info.ID + `</td>
@@ -156,7 +151,26 @@ window.addEventListener('load', async function () {
         <td>`+ coupon_info.startTime + `</td>
         <td>`+ coupon_info.endTime + `</td>
       </tr>
-      `);
+    `);
+  }
+
+  $('#create_coupon').click(async function () {
+    console.log('create coupon btn clicked!');
+    var value = $('#value').val() || 100;
+    var startTime = $('#startTime').val() || 0;
+    var endTime = $('#endTime').val() || 10;
+    var coupon_info = await App.newCoupon(value, startTime, endTime);
+    appendCouponInfo(coupon_info);
+    // $('#coupon_info > tbody:last-child').append(`
+    //   <tr>
+    //     <td>`+ coupon_info.ID + `</td>
+    //     <td>`+ coupon_info.owner + `</td>
+    //     <td>`+ coupon_info.issuer + `</td>
+    //     <td>`+ coupon_info.value + `</td>
+    //     <td>`+ coupon_info.startTime + `</td>
+    //     <td>`+ coupon_info.endTime + `</td>
+    //   </tr>
+    //   `);
     console.log(coupon_info);
     return false;
   });
