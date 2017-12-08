@@ -25,7 +25,7 @@ contract Market {
     function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public returns (uint256) {
         //Coupon coupon = new Coupon(getNextID(), startTime, endTime, value);
         var couponID = getNextID();
-        address couponAddress = new Coupon(couponID, startTime, endTime, value);
+        address couponAddress = new Coupon(couponID, startTime, endTime, value, msg.sender);
         coupons[couponID] = couponAddress;
         CreateCoupon(couponID, couponAddress);
         return couponID;

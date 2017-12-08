@@ -61,7 +61,7 @@ contract('Integration', function(accounts) {
 
     var couponID = couponReceipt.logs[0].args.id.toNumber();
     var couponAddr = couponReceipt.logs[0].args.new_address;
-    console.log(couponID, couponAddr);
+    //console.log(couponID, couponAddr);
 
     // Get coupon instance
     var coupon = Coupon.at(couponAddr);
@@ -69,7 +69,8 @@ contract('Integration', function(accounts) {
     var owner = await coupon.owner.call();
     console.log(owner);
 
-    coupon.transfer(accounts[1]);
+    var out = await coupon.transfer(accounts[1], {from: owner});
+    console.log(out);
     owner = await coupon.owner.call();
     console.log(owner);
 
