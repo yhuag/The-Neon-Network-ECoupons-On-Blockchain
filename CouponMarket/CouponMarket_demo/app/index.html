@@ -162,14 +162,16 @@
       accounts = await App.getAccs();
       var couponID = $('#id').val() || 1;
       var receiver = $('#receiver').val() || accounts[1];
-      App.transfer(couponID, receiver);
+      var success = await App.transfer(couponID, receiver);
+      console.log(success);
     });
     $('#redeem').click(async function () {
       console.log('transfer btn clicked!');
 
       accounts = await App.getAccs();
       var couponID = $('#id2').val() || 1;
-      App.redeem(couponID);
+      var success = await App.redeem(couponID);
+      console.log(success);
     });
 
   </script>
