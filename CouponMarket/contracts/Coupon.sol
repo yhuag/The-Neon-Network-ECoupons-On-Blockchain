@@ -9,8 +9,6 @@ contract Coupon {
   uint256 public endTime;
   uint256 public value;
 
-  event createCoupon(uint couponID);
-
   // Functions with this modifier can only be executed by the owner
   modifier onlyOwner(){
       assert(owner == msg.sender);
@@ -40,8 +38,6 @@ contract Coupon {
     startTime =  _startTime;
     endTime =  _endTime;
     value =  _value;
-
-    createCoupon(id);
   }
 
   // receiver is the owner to be changed to 
