@@ -108,8 +108,9 @@ window.App = {
     let market = await Market.deployed();
     var couponAddr = await market.getCouponAddrByID.call(couponID);
     var coupon = Coupon.at(couponAddr);
+    var owner = await coupon.owner.call();
     // "Redeem" the coupon 
-    var receipt = await coupon.redeem({ from: couponAddr });
+    var receipt = await coupon.redeem({ from: owner });
 
     // Get current owner and validate
     var owner = await coupon.owner.call();
@@ -188,6 +189,8 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
+    // var coupon_info;
+    // coupon_info.issuer = 
     // if(success) {
     //   appendCouponInfo();
     // }
