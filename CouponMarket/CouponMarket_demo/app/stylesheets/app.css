@@ -169,3 +169,12 @@ option.avatar {
 .avatar .ui-icon {
   background-position: left top;
 }
+
+/* label */
+label {
+  /* Other styling.. */
+  text-align: right;
+  clear: both;
+  float:left;
+  margin-right:30px;
+}
