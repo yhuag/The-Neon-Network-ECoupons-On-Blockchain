@@ -204,11 +204,11 @@ window.addEventListener('load', async function () {
     var success = await App.transfer(couponID, receiver);
     console.log(success);
 
-    // var coupon_info;
-    // coupon_info.issuer = 
-    // if(success) {
-    //   appendCouponInfo();
-    // }
+    var coupon_info;
+    coupon_info.issuer = App.getIssuer
+    if (success) {
+      appendCouponInfo();
+    }
 
   });
 
