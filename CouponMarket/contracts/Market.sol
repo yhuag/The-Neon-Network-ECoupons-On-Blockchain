@@ -15,22 +15,19 @@ contract Market {
 
     // Get Available ID
     function getNextID() returns (uint256) {
-        ++volume;   // Increment total volume
+        volume = volume + 1;   // Increment total volume
         return volume;
     }
 
     // Coupon creater
-    function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public {
+    function createCoupon(uint256 startTime, uint256 endTime, uint256 value) public returns (uint256) {
         //Coupon coupon = new Coupon(getNextID(), startTime, endTime, value);
         var couponID = getNextID();
         address couponAddress = new Coupon(couponID, startTime, endTime, value);
-        registerCoupon(couponID, couponAddress);
+        coupons[couponID] = couponAddress;
+        return couponID;
     }
 
-    // Coupon register
-    function registerCoupon(uint256 couponID, address couponAddress) {
-        coupons[couponID] = couponAddress;
-    }
 
     // Track coupon
     // function 

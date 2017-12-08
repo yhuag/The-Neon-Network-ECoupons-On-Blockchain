@@ -52,3 +52,7 @@ contract('Coupon', function(accounts) {
   });
   
 });
+
+contract('UseCase', function(accounts) {
+
+});
