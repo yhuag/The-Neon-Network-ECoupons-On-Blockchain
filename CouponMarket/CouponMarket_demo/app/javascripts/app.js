@@ -49,7 +49,7 @@ window.App = {
     status.innerHTML = message;
   },
 
-  newCoupon: async function (startTime = 0, endTime = 10, value = 10) {
+  newCoupon: async function (value = 10, startTime = 0, endTime = 10) {
     // Create market
     let market = await Market.deployed();
 
