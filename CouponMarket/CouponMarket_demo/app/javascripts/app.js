@@ -124,12 +124,11 @@ window.addEventListener('load', async function () {
 
   App.start();
 
-  console.log("ready!");
   var accounts = await App.getAccs();
   console.log(accounts);
   for (var i = 0; i < accounts.length; i++) {
     $('#receiver:last-child').append(`
-      <option value="`+ accounts[i] +`">`+ accounts[i] + `</option>
+      <option value="`+ accounts[i] + `">` + accounts[i] + `</option>
     `);
   }
 
@@ -162,7 +161,7 @@ window.addEventListener('load', async function () {
     console.log(success);
   });
   $('#redeem').click(async function () {
-    console.log('transfer btn clicked!');
+    console.log('redeem btn clicked!');
 
     var couponID = $('#id2').val() || 1;
     var success = await App.redeem(couponID);
