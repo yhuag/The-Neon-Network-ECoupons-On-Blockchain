@@ -279,11 +279,11 @@ window.addEventListener('load', async function () {
     }
   });
 
-  $('#load').click(async function () {
+  $('#refresh').click(async function () {
     var volume = await App.getVolume();
     $('#coupon_info > tbody tr').remove();
     for (var i = 1; i <= volume; i++) {
-
+      appendUpdatedCouponInfoByID(i);
     }
   });
 
