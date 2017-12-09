@@ -189,10 +189,29 @@
         }
       },
       "links": {},
-      "address": "0x18024d24f5fe673f20e47e9c3ec6de0bf9c22fbc",
-      "updated_at": 1512803234466
+      "address": "0x1dae91cd4e125d90bef85bde29ecc1e79ab9c078",
+      "updated_at": 1512808551006
+    },
+    "1512808780632": {
+      "events": {
+        "0xbc48fdaddfcfb54d36a0ac4d7e52f46cdf854784b9c0978d385a35e8383262d4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "new_owner",
+              "type": "address"
+            }
+          ],
+          "name": "ChangeOwnerTo",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x68ce4ec78e26ec90908cbae04582d573881e761f",
+      "updated_at": 1512808791497
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1512803234466
+  "updated_at": 1512808791497
 }
