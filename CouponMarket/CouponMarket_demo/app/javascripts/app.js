@@ -87,14 +87,14 @@ window.App = {
     var couponAddr = await market.getCouponAddrByID.call(couponID);
     var coupon = Coupon.at(couponAddr);
     var startTime = await coupon.startTime.call();
-    return startTime;
+    return startTime.toNumber();
   },
 
   getEndTime: async function (couponID) {
     var couponAddr = await market.getCouponAddrByID.call(couponID);
     var coupon = Coupon.at(couponAddr);
     var endTime = await coupon.endTime.call();
-    return endTime;
+    return endTime.toNumber();
   },
 
   getIssuerAddr: async function (couponID) {
@@ -141,7 +141,7 @@ window.App = {
 
   getVolume: async function () {
     var volume = await market.volume.call();
-    return volume;
+    return volume.toNumber();
   },
 };
 
@@ -167,7 +167,7 @@ window.addEventListener('load', async function () {
   }
 
   var volume = await App.getVolume();
-  $('#current_volume').html(volume.toNumber());
+  $('#current_volume').html(volume);
 
 
   var accounts = await App.getAccs();
@@ -216,7 +216,7 @@ window.addEventListener('load', async function () {
     appendCouponInfo(coupon_info);
     console.log(coupon_info);
     var volume = await App.getVolume();
-    $('#current_volume').html(volume.toNumber());
+    $('#current_volume').html(volume);
     return false;
   });
 
