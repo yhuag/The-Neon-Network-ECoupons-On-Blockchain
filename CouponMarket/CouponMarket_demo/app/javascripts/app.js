@@ -192,8 +192,8 @@ window.addEventListener('load', async function () {
         <td><img class="profile_img_align_center" src="/img/`+ accounts.indexOf(coupon_info.owner) + `.png" width="20" height="20" align="middle"> ` + coupon_info.owner + `</td>
         <td><img class="profile_img_align_center" src="/img/`+ accounts.indexOf(coupon_info.issuer) + `.png" width="20" height="20" align="middle"> ` + coupon_info.issuer + `</td>
         <td>`+ coupon_info.value + `</td>
-        <td>`+ coupon_info.startTime + `</td>
-        <td>`+ coupon_info.endTime + `</td>
+        <td>`+ new Date(coupon_info.startTime).toLocaleString() + `</td>
+        <td>`+ new Date(coupon_info.endTime).toLocaleString() + `</td>
       </tr>
     `);
   }
@@ -202,7 +202,7 @@ window.addEventListener('load', async function () {
     console.log('create coupon btn clicked!');
     var value = $('#value').val() || 100;
     var startTime = Date.now();
-    var endTime = startTime + 60 * 60; // add one hour
+    var endTime = startTime + 60 * 60 * 1000; // add one hour
     if ($('#startTime').data("DateTimePicker").date() != null) startTime = $('#startTime').data("DateTimePicker").date().unix();
     if ($('#endTime').data("DateTimePicker").date() != null) endTime = $('#endTime').data("DateTimePicker").date().unix();
     console.log(startTime, endTime);
@@ -261,8 +261,19 @@ window.addEventListener('load', async function () {
 
     // Check if the coupon owner is correct 
     var owner = await App.getOwnerAddr(couponID);
+    var startTime = await App.getStartTime(couponID);
+    var endTime = await App.getEndTime(couponID);
     if ($('#owner_redeem').val() != owner) {
       alert("coupon owner incorrect!");
+      return;
+    }
+    var now = web3.eth.getBlock("latest").timestamp;
+    if (now > endTime) {
+      alert("coupon is expired");
+      return;
+    }
+    if (now < startTime) {
+      alert("coupon redeem period not yet reached");
       return;
     }
 
