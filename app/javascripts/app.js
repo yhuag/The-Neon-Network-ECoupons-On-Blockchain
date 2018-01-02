@@ -130,8 +130,10 @@ window.App = {
     var couponAddr = await market.getCouponAddrByID.call(couponID);
     var coupon = Coupon.at(couponAddr);
     var owner = await coupon.owner.call();
+    var issuer = await coupon.issuer.call();
+
     // "Redeem" the coupon 
-    var receipt = await coupon.redeem({ from: owner });
+    var receipt = await coupon.transfer(issuer, { from: owner });
 
     // Get current owner and validate
     var owner = await coupon.owner.call();
@@ -203,9 +205,9 @@ window.addEventListener('load', async function () {
     var value = $('#value').val() || 100;
     var startTime = Date.now();
     var endTime = startTime + 60 * 60 * 1000; // add one hour
-    if ($('#startTime').data("DateTimePicker").date() != null) startTime = $('#startTime').data("DateTimePicker").date().unix();
-    if ($('#endTime').data("DateTimePicker").date() != null) endTime = $('#endTime').data("DateTimePicker").date().unix();
-    console.log(startTime, endTime);
+    if ($('#startTime').data("DateTimePicker").date() != null) startTime = $('#startTime').data("DateTimePicker").date().unix() * 1000;
+    if ($('#endTime').data("DateTimePicker").date() != null) endTime = $('#endTime').data("DateTimePicker").date().unix() * 1000;
+    // console.log(startTime, endTime);
     if (startTime > endTime) {
       alert("end time must after start time!");
       return;
@@ -265,9 +267,10 @@ window.addEventListener('load', async function () {
     var endTime = await App.getEndTime(couponID);
     if ($('#owner_redeem').val() != owner) {
       alert("coupon owner incorrect!");
+      owner = await App.getOwnerAddr(couponID);
       return;
     }
-    var now = web3.eth.getBlock("latest").timestamp;
+    var now = web3.eth.getBlock("latest").timestamp * 1000;
     if (now > endTime) {
       alert("coupon is expired");
       return;
